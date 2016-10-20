@@ -52,7 +52,6 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		createScene1();
 		createScene2();
 		SimulationScene simulationScene = new SimulationScene();
-		simulationScene.createSimulationScene();
 		m_simulationScene = simulationScene.getSimulationScene();
 		
 		m_window.setScene(m_scene1);
