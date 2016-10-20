@@ -58,7 +58,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		m_window.show();
 	}
 
-	// This method gets called whenever an event occurs. 
+	// This method gets called whenever an event occurs
 	@Override
 	public void handle(ActionEvent event) 
 	{
