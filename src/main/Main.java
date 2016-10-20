@@ -1,3 +1,9 @@
+// ======================================================================================
+// FILE: Main.java
+// CREATION DATE: OCT 19, 2016
+// ABOUT: Starting point for the entire program
+// ======================================================================================
+
 package main;
 
 import javafx.application.Application;
@@ -7,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application implements EventHandler<ActionEvent>
@@ -23,6 +28,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 	
 	Scene m_scene1;
 	Scene m_scene2;
+	Scene m_simulationScene;
 	
 	// ----------------------------------------------------------------------------------
 	// Methods
@@ -31,6 +37,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 	{
 		System.out.println("-- In main() method"); 
 		System.out.println("-- calling launch()");
+		
 		launch(args);
 	}
 
@@ -44,6 +51,9 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		
 		createScene1();
 		createScene2();
+		SimulationScene simulationScene = new SimulationScene();
+		simulationScene.createSimulationScene();
+		m_simulationScene = simulationScene.getSimulationScene();
 		
 		m_window.setScene(m_scene1);
 		m_window.show();
@@ -67,8 +77,11 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		m_buttonOne = new Button("Button One");
 		m_buttonOne.setOnAction(e -> System.out.println("-- buttonOne was clicked"));
 		
-		m_buttonTwo = new Button("Button Two");
-		m_buttonTwo.setOnAction(e -> System.out.println("-- buttonTwo was clicked"));
+		m_buttonTwo = new Button("Simulation Scene");
+		m_buttonTwo.setOnAction(e -> {
+			System.out.println("-- buttonTwo was clicked");
+			m_window.setScene(m_simulationScene);
+		});
 		 
 		m_buttonThree = new Button("Scene 2");
 		m_buttonThree.setOnAction(e -> {
@@ -88,7 +101,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		hbox.getChildren().addAll(titleLabel, m_buttonOne, m_buttonTwo, m_buttonThree);
 		
 		// Create the scene
-		m_scene1 = new Scene(hbox, 400, 400);
+		m_scene1 = new Scene(hbox, 500, 500);
 	}
 	
 	private void createScene2()
@@ -103,7 +116,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		
 		HBox hboxLayout = new HBox(20);
 		hboxLayout.getChildren().addAll(welcomeLabel, buttonScene1);
-		m_scene2 = new Scene(hboxLayout, 400, 400);
+		m_scene2 = new Scene(hboxLayout, 500, 500);
 		
 	}
 }
