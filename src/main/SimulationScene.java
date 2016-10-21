@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 
 public class SimulationScene 
@@ -30,6 +31,8 @@ public class SimulationScene
 	private TextField m_radiusInput;
 	
 	private Button m_simulateButton;
+	
+	private int m_numOfSensors;
 	
 	// ----------------------------------------------------------------------------------
 	// Constructor 
@@ -87,9 +90,28 @@ public class SimulationScene
 		GridPane.setConstraints(m_radiusInput, 1, 1);
 		
 		m_simulateButton = new Button("Simulate");
+		m_simulateButton.setTooltip(new Tooltip("Click to start simulation"));
+		m_simulateButton.setOnMouseReleased(e -> {
+			System.out.println("-- Simulate button was clicked");
+			verifyUserInput();
+			executeSimulation();
+		});
 		GridPane.setConstraints(m_simulateButton, 1, 2);
 	}
-
+	
+	private void verifyUserInput()
+	{
+		InputVerifier verifier = new InputVerifier();
+		verifier.isInt(m_numSensorInput, m_numSensorInput.getText());
+		m_numOfSensors = Integer.parseInt(m_numSensorInput.getText());
+	}
+	
+	private void executeSimulation()
+	{
+		Simulation simulation = new Simulation(m_numOfSensors);
+	}
+	
+	
 }
 
 
