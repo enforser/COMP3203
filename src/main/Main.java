@@ -100,7 +100,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		hbox.getChildren().addAll(titleLabel, m_buttonOne, m_buttonTwo, m_buttonThree);
 		
 		// Create the scene
-		m_scene1 = new Scene(hbox, 500, 500);
+		m_scene1 = new Scene(hbox, 600, 500);
 	}
 	
 	private void createScene2()
@@ -115,7 +115,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		
 		HBox hboxLayout = new HBox(20);
 		hboxLayout.getChildren().addAll(welcomeLabel, buttonScene1);
-		m_scene2 = new Scene(hboxLayout, 500, 500);
+		m_scene2 = new Scene(hboxLayout, 600, 500);
 		
 	}
 }

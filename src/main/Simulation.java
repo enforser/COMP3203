@@ -17,6 +17,8 @@ public class Simulation
 	
 	private float m_sensorRadius;
 	
+	private String m_algorithmName;
+	
 	private ArrayList<Sensor> m_sensors;
 	
 	private SensorFactory m_sensorFactory;
@@ -25,10 +27,12 @@ public class Simulation
 	// Constructor
 	
 	public Simulation(
-		int i_numOfSensors
+		int i_numOfSensors,
+		String i_algorithm
 		)
 	{
 		m_numOfSensors = i_numOfSensors;
+		m_algorithmName = new String(i_algorithm);
 		
 		calculateSensorRadius();
 		
@@ -49,6 +53,11 @@ public class Simulation
 	public float getSensorRadius()
 	{
 		return m_sensorRadius;
+	}
+	
+	public String getAlgorithmName()
+	{
+		return m_algorithmName;
 	}
 		
 	public ArrayList<Sensor> getSensors()

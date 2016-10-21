@@ -11,7 +11,10 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 
@@ -30,9 +33,22 @@ public class SimulationScene
 	private TextField m_numSensorInput;
 	private TextField m_radiusInput;
 	
+	private Separator m_separator;
+	
+	private ToggleGroup m_toggleGroup;
+	private RadioButton m_rigidRadio;
+	private RadioButton m_simpleRadio;
+	
 	private Button m_simulateButton;
 	
 	private int m_numOfSensors;
+	private String m_algorithmChoice;
+	
+	private final int SCENE_WIDTH = 600;
+	private final int SCENE_HEIGHT = 500;
+	
+	private final String RIGID_COVERAGE = "rigid";
+	private final String SIMPLE_COVERAGE = "simple";
 	
 	// ----------------------------------------------------------------------------------
 	// Constructor 
@@ -49,7 +65,7 @@ public class SimulationScene
 	{
 		createSceneElements();
 		createGridLayout();
-		m_simulationScene = new Scene(m_grid, 500, 500);
+		m_simulationScene = new Scene(m_grid, SCENE_WIDTH, SCENE_HEIGHT);
 	}
 	
 	public Scene getSimulationScene()
@@ -66,12 +82,15 @@ public class SimulationScene
 		m_grid.setPadding(new Insets(10, 10, 10, 10));
 		m_grid.setVgap(8);
 		m_grid.setHgap(10);
-		
+				
 		m_grid.getChildren().addAll(
 				m_sensorInputLabel,
 				m_radiusInputLabel,
 				m_numSensorInput,
 				m_radiusInput,
+				m_separator,
+				m_rigidRadio,
+				m_simpleRadio,
 				m_simulateButton);
 	}
 	
@@ -84,10 +103,27 @@ public class SimulationScene
 		GridPane.setConstraints(m_numSensorInput, 1, 0);
 		
 		m_radiusInputLabel = new Label("Radius:");
-		GridPane.setConstraints(m_radiusInputLabel, 0, 1);
+		GridPane.setConstraints(m_radiusInputLabel, 2, 0);
 		
 		m_radiusInput = new TextField("1");
-		GridPane.setConstraints(m_radiusInput, 1, 1);
+		GridPane.setConstraints(m_radiusInput, 3, 0);
+		
+		m_separator = new Separator();
+		m_separator.setMaxWidth(SCENE_WIDTH);
+		GridPane.setConstraints(m_separator, 0, 2, 4, 1);
+		
+		m_toggleGroup = new ToggleGroup();
+		
+		m_rigidRadio = new RadioButton("Rigid Coverage");
+		m_rigidRadio.setToggleGroup(m_toggleGroup);
+		m_rigidRadio.setUserData(RIGID_COVERAGE);
+		m_rigidRadio.setSelected(true);
+		GridPane.setConstraints(m_rigidRadio, 0, 3, 2, 1);
+		
+		m_simpleRadio = new RadioButton("Simple Coverage");
+		m_simpleRadio.setToggleGroup(m_toggleGroup);
+		m_simpleRadio.setUserData(SIMPLE_COVERAGE);
+		GridPane.setConstraints(m_simpleRadio, 2, 3, 2, 1);
 		
 		m_simulateButton = new Button("Simulate");
 		m_simulateButton.setTooltip(new Tooltip("Click to start simulation"));
@@ -96,7 +132,7 @@ public class SimulationScene
 			verifyUserInput();
 			executeSimulation();
 		});
-		GridPane.setConstraints(m_simulateButton, 1, 2);
+		GridPane.setConstraints(m_simulateButton, 0, 4);
 	}
 	
 	private void verifyUserInput()
@@ -104,11 +140,15 @@ public class SimulationScene
 		InputVerifier verifier = new InputVerifier();
 		verifier.isInt(m_numSensorInput, m_numSensorInput.getText());
 		m_numOfSensors = Integer.parseInt(m_numSensorInput.getText());
+		m_algorithmChoice = new String(m_toggleGroup.getSelectedToggle().getUserData().toString());
 	}
 	
 	private void executeSimulation()
 	{
-		Simulation simulation = new Simulation(m_numOfSensors);
+		Simulation simulation = new Simulation(m_numOfSensors, m_algorithmChoice);
+		
+		System.out.println("-- You chose the: " + simulation.getAlgorithmName()
+							+ " coverage algorithm");
 	}
 	
 	
