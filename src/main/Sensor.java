@@ -1,7 +1,7 @@
 // ======================================================================================
 // FILE: Sensor.java
 // CREATION DATE: OCT 20, 2016
-// ABOUT: The sensor object.
+// ABOUT: The sensor object. Perhaps should have a shape (e.g. a circle)
 // ======================================================================================
 
 package main;
