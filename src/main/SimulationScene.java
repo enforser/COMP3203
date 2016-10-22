@@ -47,9 +47,6 @@ public class SimulationScene
 	private final int SCENE_WIDTH = 600;
 	private final int SCENE_HEIGHT = 500;
 	
-	private final String RIGID_COVERAGE = "rigid";
-	private final String SIMPLE_COVERAGE = "simple";
-	
 	// ----------------------------------------------------------------------------------
 	// Constructor 
 	
@@ -116,13 +113,13 @@ public class SimulationScene
 		
 		m_rigidRadio = new RadioButton("Rigid Coverage");
 		m_rigidRadio.setToggleGroup(m_toggleGroup);
-		m_rigidRadio.setUserData(RIGID_COVERAGE);
+		m_rigidRadio.setUserData(AlgorithmType.RIGID_COVERAGE);
 		m_rigidRadio.setSelected(true);
 		GridPane.setConstraints(m_rigidRadio, 0, 3, 2, 1);
 		
 		m_simpleRadio = new RadioButton("Simple Coverage");
 		m_simpleRadio.setToggleGroup(m_toggleGroup);
-		m_simpleRadio.setUserData(SIMPLE_COVERAGE);
+		m_simpleRadio.setUserData(AlgorithmType.SIMPLE_COVERAGE);
 		GridPane.setConstraints(m_simpleRadio, 2, 3, 2, 1);
 		
 		m_simulateButton = new Button("Simulate");
@@ -148,7 +145,7 @@ public class SimulationScene
 		Simulation simulation = new Simulation(m_numOfSensors, m_algorithmChoice);
 		
 		System.out.println("-- You chose the: " + simulation.getAlgorithmName()
-							+ " coverage algorithm");
+							+ " algorithm");
 	}
 	
 	
