@@ -21,8 +21,6 @@ public class Simulation
 	
 	private ArrayList<Sensor> m_sensors;
 	
-	private SensorFactory m_sensorFactory;
-	
 	// ----------------------------------------------------------------------------------
 	// Constructor
 	
@@ -37,7 +35,6 @@ public class Simulation
 		calculateSensorRadius();
 		
 		m_sensors = new ArrayList<Sensor>();
-		m_sensorFactory = new SensorFactory();
 		
 		generateSensors();
 	}
@@ -77,9 +74,11 @@ public class Simulation
 	
 	private void generateSensors()
 	{
+		SensorFactory sensorFactory = new SensorFactory();
+		
 		for (int i = 0; i < m_numOfSensors; i++)
 		{
-			Sensor sensor = m_sensorFactory.createSensor();
+			Sensor sensor = sensorFactory.createSensor();
 			m_sensors.add(sensor);
 		}
 		
