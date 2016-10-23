@@ -5,8 +5,10 @@
 //        sensor movement. 
 // ======================================================================================
 
-package main;
+package Scenes;
 
+import CustomExceptions.InvalidChoiceException;
+import CustomExceptions.InvalidInputException;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
+import main.AlgorithmType;
+import main.InputVerifier;
+import main.Simulation;
 
 public class SimulationScene 
 {
@@ -40,9 +45,8 @@ public class SimulationScene
 	private RadioButton m_simpleRadio;
 	
 	private Button m_simulateButton;
-	
-	private int m_numOfSensors;
-	private String m_algorithmChoice;
+		
+	private InputVerifier m_inputVerifier;
 	
 	private final int SCENE_WIDTH = 600;
 	private final int SCENE_HEIGHT = 500;
@@ -63,6 +67,7 @@ public class SimulationScene
 		createSceneElements();
 		createGridLayout();
 		m_simulationScene = new Scene(m_grid, SCENE_WIDTH, SCENE_HEIGHT);
+		m_inputVerifier = new InputVerifier();
 	}
 	
 	public Scene getSimulationScene()
@@ -126,40 +131,43 @@ public class SimulationScene
 		m_simulateButton.setTooltip(new Tooltip("Click to start simulation"));
 		m_simulateButton.setOnMouseReleased(e -> {
 			System.out.println("-- Simulate button was clicked");
-			verifyUserInput();
-			executeSimulation();
+			attemptSimulation();
 		});
 		GridPane.setConstraints(m_simulateButton, 0, 4);
 	}
 	
-	private void verifyUserInput()
+	private void attemptSimulation()
 	{
-		InputVerifier verifier = new InputVerifier();
-		verifier.isInt(m_numSensorInput, m_numSensorInput.getText());
-		m_numOfSensors = Integer.parseInt(m_numSensorInput.getText());
-		m_algorithmChoice = new String(m_toggleGroup.getSelectedToggle().getUserData().toString());
+		try 
+		{
+			verifyUserInput();
+			executeSimulation();
+		} 
+		catch (InvalidChoiceException e1) 
+		{
+			System.out.println(e1); 
+		} 
+		catch (InvalidInputException e2)
+		{
+			System.out.println(e2);
+		}
+	}
+	
+	private void verifyUserInput() throws InvalidChoiceException, InvalidInputException
+	{
+		m_inputVerifier.isInt(m_numSensorInput, m_numSensorInput.getText());
+		m_inputVerifier.isFloat(m_radiusInput, m_radiusInput.getText());
+		m_inputVerifier.verifyChoiceValidity(m_toggleGroup);
 	}
 	
 	private void executeSimulation()
 	{
-		Simulation simulation = new Simulation(m_numOfSensors, m_algorithmChoice);
+		Simulation simulation = new Simulation(
+			m_inputVerifier.getVerifiedNumOfSensors(),
+			m_inputVerifier.getVerifiedSensorRadius(),
+			m_inputVerifier.getVerifiedAlgorithmChoice());
 		
 		System.out.println("-- You chose the: " + simulation.getAlgorithmName()
 							+ " algorithm");
-	}
-	
-	
+	}	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

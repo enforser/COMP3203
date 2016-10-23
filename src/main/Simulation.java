@@ -26,10 +26,12 @@ public class Simulation
 	
 	public Simulation(
 		int i_numOfSensors,
+		float i_sensorRadius,
 		String i_algorithm
 		)
 	{
 		m_numOfSensors = i_numOfSensors;
+		m_sensorRadius = i_sensorRadius;
 		m_algorithmName = new String(i_algorithm);
 		
 		calculateSensorRadius();
