@@ -4,7 +4,7 @@
 // ABOUT: Sets up the graphing scene and creates data series that are added to the scene. 
 // ======================================================================================
 
-package graphing;
+package main;
 
 import java.util.HashMap;
 
@@ -14,14 +14,13 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 
-public class GraphingScene {
+public class Graphing {
 	//Attributes --------------------------------------------------------------
 	NumberAxis xAxis, yAxis;
 	LineChart<Number,Number> lineChart;
-	Scene graphingScene;
 	
 	//Constructor -------------------------------------------------------------
-	public GraphingScene(){
+	public Graphing(){
 		createGraphingScene();
 	}
 	
@@ -34,12 +33,11 @@ public class GraphingScene {
         yAxis.setLabel("Total Movement");
         
         lineChart = new LineChart<Number,Number>(xAxis,yAxis);
-        lineChart.setTitle("Radius Vs. Movement Relationships");   
-        graphingScene = new Scene(lineChart);  
+        lineChart.setTitle("Radius Vs. Movement Relationships");    
 	}
 
-	public Scene getGraphingScene(){
-		return graphingScene;
+	public LineChart<Number,Number> getGraphing(){
+		return lineChart;
 	}
 	
 	public void createSeries(String name,HashMap<Float,Float> dataSeries){		
