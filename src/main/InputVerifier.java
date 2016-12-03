@@ -89,9 +89,12 @@ public class InputVerifier
 				showInvalidInputAlert(errorMessage);
 				throw new InvalidInputException(errorMessage);
 			}
-			
-			System.out.println("-- radius is: " + m_verifiedSensorRadius);
-			
+			else
+			{
+				m_verifiedSensorRadius = parsedFloat;
+				
+				System.out.println("-- radius is: " + m_verifiedSensorRadius);
+			}
 			return true;
 		}
 		catch(NumberFormatException e)
