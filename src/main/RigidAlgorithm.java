@@ -9,10 +9,10 @@ import main.Sensor;
 public class RigidAlgorithm {
 	
 	ArrayList<Sensor> sensors;
-	float radius;
+	double radius;
 	
-	float OccupiedCoordinate;
-	float totalMovement;
+	double OccupiedCoordinate;
+	double totalMovement;
 	int n = 0;
 	int numSensors;
 	
@@ -29,7 +29,7 @@ public class RigidAlgorithm {
 		Collections.sort(sensors, new Comparator<Sensor>() {
 	        @Override
 	        public int compare(Sensor o1, Sensor o2) {
-	            return Float.compare(o1.getCenter(),o2.getCenter());
+	            return Double.compare(o1.getCenter(),o2.getCenter());
 	        }
 	    });
 		

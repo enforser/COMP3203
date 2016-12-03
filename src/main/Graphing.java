@@ -8,7 +8,6 @@ package main;
 
 import java.util.HashMap;
 
-import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;

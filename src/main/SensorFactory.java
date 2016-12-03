@@ -9,11 +9,26 @@ package main;
 public class SensorFactory 
 {
 	// ----------------------------------------------------------------------------------
+	// Properties
+	
+	private RandomPositionGenerator m_randomPositionGenerator;
+	
+	// ----------------------------------------------------------------------------------
+	// Constructor
+	
+	SensorFactory()
+	{
+		m_randomPositionGenerator = new RandomPositionGenerator();
+	}
+	
+	// ----------------------------------------------------------------------------------
 	// Methods
 	
 	public Sensor createSensor()
-	{
-		Sensor sensor = new Sensor();
+	{	
+		double randomPosition = m_randomPositionGenerator.generateRandomPosition();
+		
+		Sensor sensor = new Sensor(randomPosition);
 		
 		return sensor;
 	}

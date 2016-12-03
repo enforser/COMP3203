@@ -15,7 +15,7 @@ public class Simulation
 	
 	private int m_numOfSensors;
 	
-	private float m_sensorRadius;
+	private double m_sensorRadius;
 	
 	private String m_algorithmName;
 	
@@ -49,7 +49,7 @@ public class Simulation
 		return m_numOfSensors;
 	}
 		
-	public float getSensorRadius()
+	public double getSensorRadius()
 	{
 		return m_sensorRadius;
 	}

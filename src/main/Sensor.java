@@ -11,10 +11,10 @@ public class Sensor
 	// ----------------------------------------------------------------------------------
 	// Properties
 	
-	private float m_distanceToZero;
-	private float m_distanceToOne;
-	private float m_center;
-	private float m_startingCenter;
+	private double m_distanceToZero;
+	private double m_distanceToOne;
+	private double m_center;
+	private double m_startingCenter;
 	
 	// ----------------------------------------------------------------------------------
 	// Constructor
@@ -24,8 +24,10 @@ public class Sensor
 		//default
 	}
 	
-	public Sensor(float i_initialCenter)
+	public Sensor(double i_initialCenter)
 	{
+		System.out.println("-- Sensor center: " + i_initialCenter);
+		
 		this.m_center = i_initialCenter;
 		this.m_distanceToOne = 1 - i_initialCenter;
 		this.m_distanceToZero = i_initialCenter;	
@@ -35,27 +37,27 @@ public class Sensor
 	// ----------------------------------------------------------------------------------
 	// Methods
 	
-	public float getDistanceToZero()
+	public double getDistanceToZero()
 	{
 		return m_distanceToZero;
 	}
 	
-	public float getDistanceToOne()
+	public double getDistanceToOne()
 	{
 		return m_distanceToOne;
 	}
 	
-	public float getCenter()
+	public double getCenter()
 	{
 		return m_center;
 	}
 	
-	public float getStartCenter(){
+	public double getStartCenter(){
 		return this.m_startingCenter;
 	}
 	
 	public void setCenter(
-		float i_position
+		double i_position
 		)
 	{
 		m_center = i_position;
