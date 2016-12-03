@@ -24,11 +24,12 @@ public class Sensor
 		//default
 	}
 	
-	public Sensor(float c){
-		this.m_center = c;
-		this.m_distanceToOne = 1 - c;
-		this.m_distanceToZero = c;	
-		this.m_startingCenter = c;
+	public Sensor(float i_initialCenter)
+	{
+		this.m_center = i_initialCenter;
+		this.m_distanceToOne = 1 - i_initialCenter;
+		this.m_distanceToZero = i_initialCenter;	
+		this.m_startingCenter = i_initialCenter;
 	}
 	
 	// ----------------------------------------------------------------------------------
