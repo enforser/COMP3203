@@ -9,6 +9,7 @@ package Scenes;
 
 import CustomExceptions.InvalidChoiceException;
 import CustomExceptions.InvalidInputException;
+import javafx.animation.PathTransition;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -20,6 +21,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import main.AlgorithmType;
 import main.InputVerifier;
 import main.Simulation;
@@ -51,6 +57,11 @@ public class SimulationScene
 	
 	private final int SCENE_WIDTH = 600;
 	private final int SCENE_HEIGHT = 500;
+	
+	private Path m_animationPath;
+	
+	
+	private Label testLabel;
 	
 	// ----------------------------------------------------------------------------------
 	// Constructor 
@@ -142,7 +153,7 @@ public class SimulationScene
 		try 
 		{
 			verifyUserInput();
-			executeSimulation();
+			createSimulation();
 		} 
 		catch (InvalidChoiceException e1) 
 		{
@@ -161,7 +172,7 @@ public class SimulationScene
 		m_inputVerifier.verifyChoiceValidity(m_toggleGroup);
 	}
 	
-	private void executeSimulation()
+	private void createSimulation()
 	{
 		Simulation simulation = new Simulation(
 			m_inputVerifier.getVerifiedNumOfSensors(),
@@ -173,7 +184,23 @@ public class SimulationScene
 		
 		if (simulation.getNumOfSensors() <= 10)
 		{
-			//prepareAnimatedSimulation();
+			int index = 0; 
+			if (m_grid.getChildren().contains(testLabel))
+			{
+			
+			index = m_grid.getChildren().indexOf(testLabel);
+			}
+			if (index != 0)
+			{
+				m_grid.getChildren().remove(index);
+			}
+			
+			testLabel = new Label("Test Label");
+			GridPane.setConstraints(testLabel, 0, 5);
+			
+			constructAnimationPath();
+			
+			
 		}
 	}
 	
@@ -181,6 +208,32 @@ public class SimulationScene
 	private void prepareAnimatedSimulation()
 	{
 		final Group animationGroup = new Group();
+	}
+	
+	// DEC 8
+	private void constructAnimationPath()
+	{
+		Rectangle sensor = new Rectangle(20, 5);
+		GridPane.setConstraints(sensor, 1, 7);
+		
+		m_animationPath = new Path();
+		m_animationPath.getElements().add(new MoveTo(0, 100));
+		m_animationPath.getElements().add(new LineTo(270, 100));
+		GridPane.setConstraints(m_animationPath, 1, 7, 6, 1);
+		m_grid.getChildren().add(m_animationPath);
+		m_grid.getChildren().add(sensor);
+		
+		PathTransition pt = new PathTransition();
+		
+		pt.setDuration(Duration.seconds(8.0));
+		pt.setDelay(Duration.seconds(.5));
+		pt.setPath(m_animationPath);
+		pt.setNode(sensor);
+		pt.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+		pt.setCycleCount(1);
+		pt.playFromStart();
+		
+		
 	}
 	
 	
