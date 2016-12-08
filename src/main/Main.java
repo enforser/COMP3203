@@ -76,6 +76,11 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		}
 	}
 	
+	public Stage getMainStage()
+	{
+		return m_window;
+	}
+	
 	// ----------------------------------------------------------------------------------
 	// Helper Functions
 	

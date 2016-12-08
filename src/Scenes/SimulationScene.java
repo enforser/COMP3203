@@ -21,10 +21,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.AlgorithmType;
 import main.InputVerifier;
@@ -199,6 +203,18 @@ public class SimulationScene
 			GridPane.setConstraints(testLabel, 0, 5);
 			
 			constructAnimationPath();
+			
+			//----
+			final Stage dialog = new Stage();
+            dialog.initModality(Modality.NONE);
+            //dialog.initOwner();
+            VBox dialogVbox = new VBox(20);
+            dialogVbox.getChildren().add(new Text("Animation will go in this window"));
+            Scene dialogScene = new Scene(dialogVbox, 300, 200);
+            dialog.setScene(dialogScene);
+            dialog.show();
+			
+			///---
 			
 			
 		}
