@@ -177,6 +177,7 @@ public class SimulationScene
 		}
 	}
 	
+	// dec 8 working on this function ... 
 	private void prepareAnimatedSimulation()
 	{
 		final Group animationGroup = new Group();
