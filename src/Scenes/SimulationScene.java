@@ -69,6 +69,8 @@ public class SimulationScene
 	
 	private Path m_animationPath;
 	
+	private Group m_animationGroup;
+	
 	private Label testLabel; // delete this later
 	
 	// ----------------------------------------------------------------------------------
@@ -226,14 +228,14 @@ public class SimulationScene
 			constructAnimationPath();
 			
 			//----
-			final Stage dialog = new Stage();
-            dialog.initModality(Modality.NONE);
+			///final Stage dialog = new Stage();
+            ///dialog.initModality(Modality.NONE);
             //dialog.initOwner();
-            VBox dialogVbox = new VBox(20);
-            dialogVbox.getChildren().add(new Text("Animation will go in this window"));
-            Scene dialogScene = new Scene(dialogVbox, 300, 200);
-            dialog.setScene(dialogScene);
-            dialog.show();
+            ///VBox dialogVbox = new VBox(20);
+            ///dialogVbox.getChildren().add(new Text("Animation will go in this window"));
+            ///Scene dialogScene = new Scene(dialogVbox, 300, 200);
+            ///dialog.setScene(dialogScene);
+            ///dialog.show();
 			
 			///---
 			
@@ -257,12 +259,18 @@ public class SimulationScene
 		Rectangle sensor = new Rectangle(20, 5);
 		GridPane.setConstraints(sensor, 1, 7);
 		
+		m_animationGroup = new Group();
+		
+		m_grid.getChildren().add(m_animationGroup);
+		GridPane.setConstraints(m_animationGroup, 0, 7, 6, 1);
+		
+		
 		m_animationPath = new Path();
 		m_animationPath.getElements().add(new MoveTo(0, 100));
-		m_animationPath.getElements().add(new LineTo(270, 100));
-		GridPane.setConstraints(m_animationPath, 1, 7, 6, 1);
-		m_grid.getChildren().add(m_animationPath);
-		m_grid.getChildren().add(sensor);
+		m_animationPath.getElements().add(new LineTo(300, 100));
+		//GridPane.setConstraints(m_animationPath, 1, 7, 6, 1);
+		m_animationGroup.getChildren().add(m_animationPath);
+		m_animationGroup.getChildren().add(sensor);
 		
 		PathTransition pt = new PathTransition();
 		
