@@ -10,6 +10,7 @@ package Scenes;
 import CustomExceptions.InvalidChoiceException;
 import CustomExceptions.InvalidInputException;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -169,5 +170,41 @@ public class SimulationScene
 		
 		System.out.println("-- You chose the: " + simulation.getAlgorithmName()
 							+ " algorithm");
-	}	
+		
+		if (simulation.getNumOfSensors() <= 10)
+		{
+			//prepareAnimatedSimulation();
+		}
+	}
+	
+	private void prepareAnimatedSimulation()
+	{
+		final Group animationGroup = new Group();
+	}
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
