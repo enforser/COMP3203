@@ -62,7 +62,7 @@ public class SimulationScene
 	private RadioButton m_simpleRadio;
 	
 	private Button m_confirmInputButton;
-	private Button m_viewSimulationButton;
+	private Button m_runSimulationButton;
 		
 	private final int SCENE_WIDTH = 600;
 	private final int SCENE_HEIGHT = 500;
@@ -121,7 +121,7 @@ public class SimulationScene
 				m_rigidRadio,
 				m_simpleRadio,
 				m_confirmInputButton,
-				m_viewSimulationButton);
+				m_runSimulationButton);
 	}
 	
 	private void createSceneElements()
@@ -163,14 +163,14 @@ public class SimulationScene
 		});
 		GridPane.setConstraints(m_confirmInputButton, 0, 4);
 		
-		m_viewSimulationButton = new Button("View Simulation");
-		m_viewSimulationButton.setTooltip(new Tooltip("Click to animate simulation"));
-		m_viewSimulationButton.setDisable(true);
-		m_viewSimulationButton.setOnMouseReleased(e -> {
+		m_runSimulationButton = new Button("Run Simulation");
+		m_runSimulationButton.setTooltip(new Tooltip("Click to animate simulation"));
+		m_runSimulationButton.setDisable(true);
+		m_runSimulationButton.setOnMouseReleased(e -> {
 			System.out.println("-- View Simulation button was clicked");
 			//// openSimulationWindow();
 		});
-		GridPane.setConstraints(m_viewSimulationButton, 1, 4);
+		GridPane.setConstraints(m_runSimulationButton, 1, 4);
 	}
 	
 	private void attemptSimulation()
@@ -209,7 +209,7 @@ public class SimulationScene
 		
 		if (m_simulation.getNumOfSensors() <= 10)
 		{
-			enableButton(m_viewSimulationButton);
+			enableButton(m_runSimulationButton);
 			
 			int index = 0; 
 			if (m_grid.getChildren().contains(testLabel))
@@ -238,16 +238,14 @@ public class SimulationScene
             ///dialog.show();
 			
 			///---
-			
-			
 		}
 		else
 		{
-			disableButton(m_viewSimulationButton);
+			disableButton(m_runSimulationButton);
 		}
 	}
 	
-	// dec 8 working on this function ... 
+	// DEC 8 working on this function ... 
 	private void prepareAnimatedSimulation()
 	{
 		final Group animationGroup = new Group();
@@ -266,8 +264,8 @@ public class SimulationScene
 		
 		
 		m_animationPath = new Path();
-		m_animationPath.getElements().add(new MoveTo(0, 100));
-		m_animationPath.getElements().add(new LineTo(300, 100));
+		m_animationPath.getElements().add(new MoveTo(0, 0));
+		m_animationPath.getElements().add(new LineTo(400, 0));
 		//GridPane.setConstraints(m_animationPath, 1, 7, 6, 1);
 		m_animationGroup.getChildren().add(m_animationPath);
 		m_animationGroup.getChildren().add(sensor);
