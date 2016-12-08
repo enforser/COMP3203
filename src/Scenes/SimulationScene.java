@@ -39,6 +39,12 @@ public class SimulationScene
 	// ----------------------------------------------------------------------------------
 	// Properties
 	
+	private InputVerifier m_inputVerifier;
+	private Simulation m_simulation;
+	
+	// ----------------------------------------------------------------------------------
+	// GUI Properties
+	
 	private Scene m_simulationScene;
 	
 	private GridPane m_grid;
@@ -55,17 +61,15 @@ public class SimulationScene
 	private RadioButton m_rigidRadio;
 	private RadioButton m_simpleRadio;
 	
-	private Button m_simulateButton;
+	private Button m_confirmInputButton;
+	private Button m_viewSimulationButton;
 		
-	private InputVerifier m_inputVerifier;
-	
 	private final int SCENE_WIDTH = 600;
 	private final int SCENE_HEIGHT = 500;
 	
 	private Path m_animationPath;
 	
-	
-	private Label testLabel;
+	private Label testLabel; // delete this later
 	
 	// ----------------------------------------------------------------------------------
 	// Constructor 
@@ -91,6 +95,11 @@ public class SimulationScene
 		return m_simulationScene;
 	}
 	
+	public Simulation getSimulation()
+	{
+		return m_simulation;
+	}
+	
 	// ----------------------------------------------------------------------------------
 	// Helper Functions
 	
@@ -109,7 +118,8 @@ public class SimulationScene
 				m_separator,
 				m_rigidRadio,
 				m_simpleRadio,
-				m_simulateButton);
+				m_confirmInputButton,
+				m_viewSimulationButton);
 	}
 	
 	private void createSceneElements()
@@ -143,13 +153,22 @@ public class SimulationScene
 		m_simpleRadio.setUserData(AlgorithmType.SIMPLE_COVERAGE);
 		GridPane.setConstraints(m_simpleRadio, 2, 3, 2, 1);
 		
-		m_simulateButton = new Button("Simulate");
-		m_simulateButton.setTooltip(new Tooltip("Click to start simulation"));
-		m_simulateButton.setOnMouseReleased(e -> {
-			System.out.println("-- Simulate button was clicked");
+		m_confirmInputButton = new Button("Confirm Input");
+		m_confirmInputButton.setTooltip(new Tooltip("Click to start simulation"));
+		m_confirmInputButton.setOnMouseReleased(e -> {
+			System.out.println("-- Confirm Input button was clicked");
 			attemptSimulation();
 		});
-		GridPane.setConstraints(m_simulateButton, 0, 4);
+		GridPane.setConstraints(m_confirmInputButton, 0, 4);
+		
+		m_viewSimulationButton = new Button("View Simulation");
+		m_viewSimulationButton.setTooltip(new Tooltip("Click to animate simulation"));
+		m_viewSimulationButton.setDisable(true);
+		m_viewSimulationButton.setOnMouseReleased(e -> {
+			System.out.println("-- View Simulation button was clicked");
+			//// openSimulationWindow();
+		});
+		GridPane.setConstraints(m_viewSimulationButton, 1, 4);
 	}
 	
 	private void attemptSimulation()
@@ -178,16 +197,18 @@ public class SimulationScene
 	
 	private void createSimulation()
 	{
-		Simulation simulation = new Simulation(
+		m_simulation = new Simulation(
 			m_inputVerifier.getVerifiedNumOfSensors(),
 			m_inputVerifier.getVerifiedSensorRadius(),
 			m_inputVerifier.getVerifiedAlgorithmChoice());
 		
-		System.out.println("-- You chose the: " + simulation.getAlgorithmName()
+		System.out.println("-- You chose the: " + m_simulation.getAlgorithmName()
 							+ " algorithm");
 		
-		if (simulation.getNumOfSensors() <= 10)
+		if (m_simulation.getNumOfSensors() <= 10)
 		{
+			enableButton(m_viewSimulationButton);
+			
 			int index = 0; 
 			if (m_grid.getChildren().contains(testLabel))
 			{
@@ -217,6 +238,10 @@ public class SimulationScene
 			///---
 			
 			
+		}
+		else
+		{
+			disableButton(m_viewSimulationButton);
 		}
 	}
 	
@@ -250,6 +275,20 @@ public class SimulationScene
 		pt.playFromStart();
 		
 		
+	}
+	
+	private void enableButton(
+		Button button
+		)
+	{
+		button.setDisable(false);
+	}
+	
+	private void disableButton(
+		Button button
+		)
+	{
+		button.setDisable(true);
 	}
 	
 	
