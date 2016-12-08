@@ -41,8 +41,10 @@ public class Main extends Application implements EventHandler<ActionEvent>
 	/*
 	 * The following commented out code is an example of how to run the algorithm defined in the Algorithm class. 
 	 * 
-	 * 
+	 * */
 		//Algorithm constructor takes number of sensors, and the radius of the sensors. 
+	
+	/*	
 		Algorithm algo = new Algorithm(5, 0.1);
 		algo.run();
 	*/
