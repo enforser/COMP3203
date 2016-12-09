@@ -4,10 +4,15 @@
 // ABOUT: Holds the constants that are global to the program
 // ======================================================================================
 
-package main;
+package utilities;
 
 public final class Constants 
 {
 	public static final float INTERVAL_MIN = 0;
 	public static final float INTERVAL_MAX = 1;
+	
+	public static final int PATH_LENGTH = 1000;
+	
+	public static final int SCENE_WIDTH = 1025;
+	public static final int SCENE_HEIGHT = 400;
 }

@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import utilities.Constants;
 
 public class InputVerifier 
 {

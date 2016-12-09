@@ -33,6 +33,7 @@ import javafx.util.Duration;
 import main.AlgorithmType;
 import main.InputVerifier;
 import main.Simulation;
+import utilities.Constants;
 
 public class SimulationScene 
 {
@@ -64,8 +65,8 @@ public class SimulationScene
 	private Button m_confirmInputButton;
 	private Button m_runSimulationButton;
 		
-	private final int SCENE_WIDTH = 600;
-	private final int SCENE_HEIGHT = 500;
+	private final int SCENE_WIDTH = Constants.SCENE_WIDTH;
+	private final int SCENE_HEIGHT = Constants.SCENE_HEIGHT;
 	
 	private Path m_animationPath;
 	
@@ -265,7 +266,7 @@ public class SimulationScene
 		
 		m_animationPath = new Path();
 		m_animationPath.getElements().add(new MoveTo(0, 0));
-		m_animationPath.getElements().add(new LineTo(400, 0));
+		m_animationPath.getElements().add(new LineTo(Constants.PATH_LENGTH, 0));
 		//GridPane.setConstraints(m_animationPath, 1, 7, 6, 1);
 		m_animationGroup.getChildren().add(m_animationPath);
 		m_animationGroup.getChildren().add(sensor);

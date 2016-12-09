@@ -21,12 +21,12 @@ public class Sensor
 	
 	public Sensor()
 	{
-		//default
+
 	}
 	
 	public Sensor(double i_initialCenter)
 	{
-		System.out.println("-- Sensor center: " + i_initialCenter);
+		//System.out.println("-- Sensor center: " + i_initialCenter);
 		
 		this.m_center = i_initialCenter;
 		this.m_distanceToOne = 1 - i_initialCenter;
