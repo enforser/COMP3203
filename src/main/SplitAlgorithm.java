@@ -25,7 +25,7 @@ public class SplitAlgorithm {
 	
 	public double run() {
 		
-        //System.out.println("Running the Fors Algorithm");
+        //System.out.println("Running the Split Algorithm");
 		
 		Collections.sort(sensors, new Comparator<Sensor>() {
 	        @Override
@@ -57,7 +57,7 @@ public class SplitAlgorithm {
 			if(Math.abs(sensors.get(rightID).getCenter() - sensors.get(leftID).getCenter()) <= (radius*2)) {
 				break;
 			}
-			//move the sensors
+			//otherwise move the sensors to left or right, respectively
 			else {
 				
 				totalMovement += Math.abs(sensors.get(rightID).getCenter() - (sensors.get(prevRightID).getCenter() - (radius*2)));

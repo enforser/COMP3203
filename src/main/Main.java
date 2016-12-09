@@ -45,11 +45,11 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		//Algorithm constructor takes number of sensors, and the radius of the sensors. 
 	
 	
-		SplitAlgorithm algo;
+		SimpleAlgorithm algo;
 		int runTimes = 200;
 		double movement = 0;
 		for (int i = 0; i < runTimes; i++) {
-			algo = new SplitAlgorithm(7, 0.1);
+			algo = new SimpleAlgorithm(7, 0.1);
 			movement += algo.run();
 		}
 		System.out.println("Average movement of " + runTimes + " runs is: " + movement/runTimes);

@@ -95,8 +95,8 @@ public class Algorithm {
 			
 		}
 		//System.out.print("After:\n");
+		printSensors();
 		return totalMovement;
-		//printSensors();
 	}
 	
 	private void printSensors() {
