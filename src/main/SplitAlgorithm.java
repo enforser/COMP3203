@@ -54,31 +54,32 @@ public class SplitAlgorithm {
 			prevLeftID = leftID - 1;
 			
 			//check if current sensors are touching each other
-			if(Math.abs(sensors.get(rightID).getCenter() - sensors.get(leftID).getCenter()) <= (radius*2)) {
+			if(Math.abs(sensors.get(rightID).getCenter() 
+					- sensors.get(leftID).getCenter()) <= (radius*2)) {
 				break;
 			}
 			//otherwise move the sensors to left or right, respectively
 			else {
 				
-				totalMovement += Math.abs(sensors.get(rightID).getCenter() - (sensors.get(prevRightID).getCenter() - (radius*2)));
-				totalMovement += Math.abs(sensors.get(leftID).getCenter() - (sensors.get(prevLeftID).getCenter() + (radius*2)));
+				//update the movement taking place
+				totalMovement += Math.abs(sensors.get(rightID).getCenter() 
+						- (sensors.get(prevRightID).getCenter() - (radius*2)));
+				totalMovement += Math.abs(sensors.get(leftID).getCenter() 
+						- (sensors.get(prevLeftID).getCenter() + (radius*2)));
 				
+				//update the sensor objects being moved
 				sensors.get(rightID).setCenter(
 						sensors.get(prevRightID).getCenter() - (radius*2));
 				sensors.get(leftID).setCenter(
 						sensors.get(prevLeftID).getCenter() + (radius*2));
 			}
-			
-			
-			//change the IDs
-			
 		}
-		//System.out.print("After:\n");
 		printSensors();
 		
 		return totalMovement;
 	}
 	
+	//prints all the sensors with their current x-coordinate on interval
 	private void printSensors() {
 		for (int i = 0; i < sensors.size(); i++) {
 			System.out.print("Sensor " + (i+1) + " = " + sensors.get(i).getCenter() + "\n");
@@ -87,6 +88,8 @@ public class SplitAlgorithm {
 		System.out.println("Total Movement: " + totalMovement);
 	}
 	
+	//Creates a random array list of Sensor type objects
+	//Used for testing purposes - should not be needed in final
 	public ArrayList<Sensor> makeRandSensors(int numSensors) {
 		ArrayList<Sensor> array = new ArrayList<Sensor>();		
 		Random generator = new Random();
