@@ -47,13 +47,13 @@ public class SimpleAlgorithm {
 				totalMovement += sensors.get(ID).getCenter() - (sensors.get(ID-1).getCenter() + (radius*2));
 				sensors.get(ID).setCenter(sensors.get(ID - 1).getCenter() + (2*radius));
 			}
-			
 		}
 		
 		printSensors();
 		return totalMovement;
 	}
 	
+	//prints all the sensors with their current x-coordinate on interval
 	private void printSensors() {
 		for (int i = 0; i < sensors.size(); i++) {
 			System.out.print("Sensor " + (i+1) + " = " + sensors.get(i).getCenter() + "\n");
@@ -62,6 +62,8 @@ public class SimpleAlgorithm {
 		System.out.println("Total Movement: " + totalMovement);
 	}
 	
+	//Creates a random array list of Sensor type objects
+	//Used for testing purposes - should not be needed in final
 	public ArrayList<Sensor> makeRandSensors(int numSensors) {
 		ArrayList<Sensor> array = new ArrayList<Sensor>();		
 		Random generator = new Random();
