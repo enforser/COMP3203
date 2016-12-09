@@ -17,6 +17,12 @@ public class Algorithm {
 		totalMovement = 0;
 	}
 	
+	public Algorithm(Simulation sim) {
+		sensors = sim.getSensors();
+		radius = sim.getSensorRadius();
+		totalMovement = 0;
+	}
+	
 	public double run() {
 		
         //System.out.println("Running the Fors Algorithm");
