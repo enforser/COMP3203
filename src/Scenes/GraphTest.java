@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import main.Graphing;
 
-public class MainTest extends Application{
+public class GraphTest extends Application{
 	@Override public void start(Stage stage) {
     	HashMap<Float,Float> dataSeries = new HashMap<Float, Float>(); 
     	dataSeries.put(0.8f,0.28f);
@@ -15,10 +15,10 @@ public class MainTest extends Application{
     	
         stage.setTitle("Comp3203");
         
-        MainScene main = new MainScene();
-        main.getGraphing().createSeries("#S=1",dataSeries);
+        GraphScene graph = new GraphScene();
+        graph.getGraph().createSeries("#S=1",dataSeries);
         
-        stage.setScene(main.getMainScene());
+        stage.setScene(graph.getGraphScene());
         
         stage.show();       
     }
