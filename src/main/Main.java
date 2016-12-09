@@ -6,6 +6,9 @@
 
 package main;
 
+import java.util.HashMap;
+
+import Scenes.GraphScene;
 import Scenes.SimulationScene;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -28,8 +31,10 @@ public class Main extends Application implements EventHandler<ActionEvent>
 	Stage m_window;
 	
 	Scene m_scene1;
-	Scene m_scene2;
+	Scene m_graphingScene;
 	Scene m_simulationScene;
+	
+	GraphScene graph;
 	
 	// ----------------------------------------------------------------------------------
 	// Methods
@@ -53,7 +58,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 			movement += algo.run();
 		}
 		System.out.println("Average movement of " + runTimes + " runs is: " + movement/runTimes);
-	
+		
 		launch(args);
 	}
 
@@ -66,9 +71,21 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		m_window.setTitle("COMP3203 A2");
 		
 		createScene1();
-		createScene2();
 		SimulationScene simulationScene = new SimulationScene();
 		m_simulationScene = simulationScene.getSimulationScene();
+		
+		graph = new GraphScene(m_scene1,m_window);
+		
+		//This is temporary hardcoded data
+		HashMap<Float,Float> dataSeries = new HashMap<Float, Float>(); 
+    	dataSeries.put(0.8f,0.28f);
+    	dataSeries.put(0.1f,0.84f);
+    	dataSeries.put(0.5f,0.38f);
+    	dataSeries.put(0.34f,0.45f);
+    	graph.getGraph().createSeries("#S=1",dataSeries);
+		//--------------------------------
+    	
+		m_graphingScene = graph.getGraphScene();
 		
 		m_window.setScene(m_scene1);
 		m_window.show();
@@ -103,10 +120,10 @@ public class Main extends Application implements EventHandler<ActionEvent>
 			m_window.setScene(m_simulationScene);
 		});
 		 
-		m_buttonThree = new Button("Scene 2");
+		m_buttonThree = new Button("Graphing Scene");
 		m_buttonThree.setOnAction(e -> {
 			System.out.println("-- buttonThree was clicked");
-			m_window.setScene(m_scene2);
+			m_window.setScene(m_graphingScene);
 			}
 		);
 	}
@@ -122,22 +139,6 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		
 		// Create the scene
 		m_scene1 = new Scene(hbox, 600, 500);
-	}
-	
-	private void createScene2()
-	{
-		Label welcomeLabel = new Label("Welcome!");
-		
-		Button buttonScene1 = new Button("Scene 1 (Home)");
-		buttonScene1.setOnAction(e -> {
-			System.out.println("-- buttonScene2 was clicked");
-			m_window.setScene(m_scene1);
-		});
-		
-		HBox hboxLayout = new HBox(20);
-		hboxLayout.getChildren().addAll(welcomeLabel, buttonScene1);
-		m_scene2 = new Scene(hboxLayout, 600, 500);
-		
 	}
 }
 
