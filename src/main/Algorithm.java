@@ -9,15 +9,17 @@ public class Algorithm {
 	
 	ArrayList<Sensor> sensors;
 	double radius;
+	double totalMovement;
 	
 	public Algorithm(int numSensors, double rad) {
 		sensors = makeRandSensors(numSensors);
 		radius = rad; //Takes 20 sensors to cover entire interval. 
+		totalMovement = 0;
 	}
 	
-	public void run() {
+	public double run() {
 		
-        System.out.println("Running the Fors Algorithm");
+        //System.out.println("Running the Fors Algorithm");
 		
 		Collections.sort(sensors, new Comparator<Sensor>() {
 	        @Override
@@ -25,10 +27,9 @@ public class Algorithm {
 	            return Double.compare(o1.getCenter(),o2.getCenter());
 	        }
 	    });
-		
-		System.out.print("\n\nBefore:\n");
-		printSensors();
-		System.out.print("\n\n\n");
+		//System.out.print("\n\nBefore:\n");
+		//printSensors();
+		//System.out.print("\n\n\n");
 		
 		int n = sensors.size();
 		int currID = sensors.size() - 1;
@@ -46,6 +47,7 @@ public class Algorithm {
 		//  if not touching right side of interval then move it until it touches
 		//  else remove amount of space lying outside interval from allowed overlap
 		if (sensors.get(currID).getCenter() + radius < 1 || overlap <= radius) {
+			totalMovement += Math.abs((1 - radius) - sensors.get(currID).getCenter());
 			sensors.get(currID).setCenter(1 - radius);
 		}
 		else {
@@ -61,11 +63,13 @@ public class Algorithm {
 			//move the left sensor to the right sensor leaving no space 
 			//between radiuses while creating no overlap between radiuses
 			if (overlap <= 0) {
+				totalMovement += Math.abs((sensors.get(prevID).getCenter() - (2*radius)) - sensors.get(currID).getCenter());
 				sensors.get(currID).setCenter((sensors.get(prevID).getCenter() - (2*radius)));
 			}
 			//if there is space between the current sensor and the previous 
 			//one then move current until it touches previous
 			else if (sensors.get(prevID).getCenter() - sensors.get(currID).getCenter() > (2*radius)) {
+				totalMovement += Math.abs((sensors.get(prevID).getCenter() - (2*radius)) - sensors.get(currID).getCenter());
 				sensors.get(currID).setCenter((sensors.get(prevID).getCenter() - (2*radius)));
 			}
 			//if there is no space between the two sensors then figure out
@@ -84,14 +88,17 @@ public class Algorithm {
 			prevID--;
 			
 		}
-		System.out.print("After:\n");
-		printSensors();
+		//System.out.print("After:\n");
+		return totalMovement;
+		//printSensors();
 	}
 	
 	private void printSensors() {
 		for (int i = 0; i < sensors.size(); i++) {
 			System.out.print("Sensor " + (i+1) + " = " + sensors.get(i).getCenter() + "\n");
 		}
+		
+		System.out.println("Total Movement: " + totalMovement);
 	}
 	
 	public ArrayList<Sensor> makeRandSensors(int numSensors) {
