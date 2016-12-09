@@ -5,19 +5,19 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
-public class Algorithm {
+public class OverlapAlgorithm {
 	
 	ArrayList<Sensor> sensors;
 	double radius;
 	double totalMovement;
 	
-	public Algorithm(int numSensors, double rad) {
+	public OverlapAlgorithm(int numSensors, double rad) {
 		sensors = makeRandSensors(numSensors);
 		radius = rad; //Takes 20 sensors to cover entire interval. 
 		totalMovement = 0;
 	}
 	
-	public Algorithm(Simulation sim) {
+	public OverlapAlgorithm(Simulation sim) {
 		sensors = sim.getSensors();
 		radius = sim.getSensorRadius();
 		totalMovement = 0;
