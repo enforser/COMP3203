@@ -8,6 +8,8 @@ package main;
 
 import java.util.ArrayList;
 
+import utilities.Constants;
+
 public class Simulation 
 {
 	// ----------------------------------------------------------------------------------
@@ -21,6 +23,8 @@ public class Simulation
 	
 	private ArrayList<Sensor> m_sensors;
 	
+	private boolean m_hasAnimation;
+	
 	// ----------------------------------------------------------------------------------
 	// Constructor
 	
@@ -33,6 +37,8 @@ public class Simulation
 		m_numOfSensors = i_numOfSensors;
 		m_sensorRadius = i_sensorRadius;
 		m_algorithmName = new String(i_algorithm);
+		
+		animationGoNoGo(m_numOfSensors);
 		
 		calculateSensorRadius();
 		
@@ -64,6 +70,11 @@ public class Simulation
 		return m_sensors;
 	}
 	
+	public boolean hasAnimation()
+	{
+		return m_hasAnimation;
+	}
+	
 	// ----------------------------------------------------------------------------------
 	// Helper Functions
 	
@@ -74,13 +85,23 @@ public class Simulation
 		m_sensorRadius = m_numOfSensors/(2*m_numOfSensors);
 	}
 	
+	private void animationGoNoGo(
+		int i_numOfSensors
+		)
+	{
+		if (i_numOfSensors <= Constants.MAX_SENSORS_ANIME)
+		{
+			m_hasAnimation = true;
+		}
+	}
+	
 	private void generateSensors()
 	{
 		SensorFactory sensorFactory = new SensorFactory();
-		
+				
 		for (int i = 0; i < m_numOfSensors; i++)
 		{
-			Sensor sensor = sensorFactory.createSensor();
+			Sensor sensor = sensorFactory.createSensor(m_hasAnimation);
 			m_sensors.add(sensor);
 		}
 		

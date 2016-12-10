@@ -15,4 +15,6 @@ public final class Constants
 	
 	public static final int SCENE_WIDTH = 1025;
 	public static final int SCENE_HEIGHT = 400;
+	
+	public static final int MAX_SENSORS_ANIME = 20;
 }

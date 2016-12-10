@@ -68,7 +68,7 @@ public class SimpleAlgorithm {
 		ArrayList<Sensor> array = new ArrayList<Sensor>();		
 		Random generator = new Random();
 		for (int i = 0; i < numSensors; i++) {
-			array.add(new Sensor(generator.nextFloat()));
+			array.add(new Sensor(generator.nextFloat(), false));
 		}	
 		return array;
 	}

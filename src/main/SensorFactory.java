@@ -24,11 +24,13 @@ public class SensorFactory
 	// ----------------------------------------------------------------------------------
 	// Methods
 	
-	public Sensor createSensor()
+	public Sensor createSensor(
+		boolean i_hasAnimation
+		)
 	{	
 		double randomPosition = m_randomPositionGenerator.generateRandomPosition();
 		
-		Sensor sensor = new Sensor(randomPosition);
+		Sensor sensor = new Sensor(randomPosition, i_hasAnimation);
 		
 		return sensor;
 	}
