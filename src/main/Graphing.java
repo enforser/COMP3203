@@ -35,7 +35,7 @@ public class Graphing {
         lineChart.setTitle("Radius Vs. Movement Relationships");    
 	}
 
-	public LineChart<Number,Number> getGraphing(){
+	public LineChart<Number,Number> getLChart(){
 		return lineChart;
 	}
 	
