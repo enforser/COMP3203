@@ -20,7 +20,7 @@ public class InputVerifier
 	// Properties
 	
 	private int m_verifiedNumOfSensors;
-	private float m_verifiedSensorRadius;
+	private double m_verifiedSensorRadius;
 	private String m_verifiedAlgorithmChoice;
 	
 	// ----------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ public class InputVerifier
 		return m_verifiedNumOfSensors;
 	}
 	
-	public float getVerifiedSensorRadius()
+	public double getVerifiedSensorRadius()
 	{
 		return m_verifiedSensorRadius;
 	}
@@ -75,16 +75,16 @@ public class InputVerifier
 		}
 	}
 		
-	public boolean isFloat(
+	public boolean isDouble(
 		TextField i_textField,
 		String i_inputValue
 		) throws InvalidInputException
 	{
 		try
 		{
-			float parsedFloat = Float.parseFloat(i_inputValue);
+			double parsedDouble = Double.parseDouble(i_inputValue);
 			
-			if (parsedFloat <= 0 || parsedFloat > Constants.INTERVAL_MAX)
+			if (parsedDouble <= 0 || parsedDouble > Constants.INTERVAL_MAX)
 			{
 				String errorMessage = "Radius(r) must be 0 < r < 1";
 				showInvalidInputAlert(errorMessage);
@@ -92,7 +92,7 @@ public class InputVerifier
 			}
 			else
 			{
-				m_verifiedSensorRadius = parsedFloat;
+				m_verifiedSensorRadius = parsedDouble;
 				
 				System.out.println("-- radius is: " + m_verifiedSensorRadius);
 			}
@@ -100,7 +100,7 @@ public class InputVerifier
 		}
 		catch(NumberFormatException e)
 		{
-			String errorMessage = "Radius must be a float";
+			String errorMessage = "Radius must be a double";
 						
 			showInvalidInputAlert(errorMessage);
 			

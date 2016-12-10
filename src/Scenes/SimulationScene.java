@@ -7,6 +7,8 @@
 
 package Scenes;
 
+import java.util.ArrayList;
+
 import CustomExceptions.InvalidChoiceException;
 import CustomExceptions.InvalidInputException;
 import javafx.animation.PathTransition;
@@ -29,12 +31,14 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.AlgorithmType;
 import main.InputVerifier;
+import main.Sensor;
 import main.Simulation;
 import utilities.Constants;
 
@@ -142,7 +146,7 @@ public class SimulationScene
 		m_radiusInputLabel = new Label("Radius:");
 		GridPane.setConstraints(m_radiusInputLabel, 2, 0);
 
-		m_radiusInput = new TextField("1");
+		m_radiusInput = new TextField("0.1");
 		GridPane.setConstraints(m_radiusInput, 3, 0);
 
 		m_separator = new Separator();
@@ -209,7 +213,7 @@ public class SimulationScene
 	private void verifyUserInput() throws InvalidChoiceException, InvalidInputException
 	{
 		m_inputVerifier.isInt(m_numSensorInput, m_numSensorInput.getText());
-		m_inputVerifier.isFloat(m_radiusInput, m_radiusInput.getText());
+		m_inputVerifier.isDouble(m_radiusInput, m_radiusInput.getText());
 		m_inputVerifier.verifyChoiceValidity(m_toggleGroup);
 	}
 
@@ -223,7 +227,7 @@ public class SimulationScene
 		System.out.println("-- You chose the: " + m_simulation.getAlgorithmName()
 							+ " algorithm");
 
-		if (m_simulation.getNumOfSensors() <= 10)
+		if (m_simulation.getNumOfSensors() <= 20)
 		{
 			enableButton(m_runSimulationButton);
 
@@ -270,60 +274,126 @@ public class SimulationScene
 	// DEC 8
 	private void constructAnimationPath()
 	{
-		Rectangle sensor = new Rectangle(20, 5);
+		m_animationGrid = new GridPane();
+		
+		ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
+		ArrayList<TranslateTransition> translations = new ArrayList<TranslateTransition>();
+		
+		for(Sensor sensor : m_simulation.getSensors())
+		{			
+			Rectangle rect = new Rectangle(sensor.getScaledWidth(), 5);
+			rectangles.add(rect);
+			
+			TranslateTransition tt = new TranslateTransition();
+			tt.setNode(rect);
+			tt.setFromX(sensor.getStartCenter()*1000);
+			tt.setToX(0);
+
+
+			tt.setCycleCount(1);
+			tt.setDuration(Duration.seconds(8.0));
+			translations.add(tt);
+			tt.play();
+			
+			m_animationGrid.getChildren().add(rect);
+			
+			tt.play();
+		}
+		
+		///Rectangle sensor = new Rectangle(20, 5);
+		///Rectangle rect2 = new Rectangle(30,5);
+		///rect2.setOpacity(50);
 		
 		Line unitInterval = new Line();
 		
 		unitInterval.setStartX(0);
 		unitInterval.setEndX(1000);
-		//GridPane.setConstraints(sensor, 1, 7);
-		//sensor.relocate(800, 500);
 
-		m_animationGrid = new GridPane();
-		m_animationGrid.getChildren().addAll(unitInterval, sensor);
+		m_animationGrid.getChildren().add(unitInterval);
 		m_grid.getChildren().add(m_animationGrid);
 		GridPane.setConstraints(m_animationGrid, 0, 8, 8, 1);
+		
+		
 
-		/* PATH TRANSITIONS WAS NOT WORKING
-
-		m_grid.getChildren().add(m_animationGroup);
-		GridPane.setConstraints(m_animationGroup, 0, 7, 6, 1);
-
-
-		m_animationPath = new Path();
-		m_animationPath.getElements().add(new MoveTo(800, 0));
-		m_animationPath.getElements().add(new LineTo(300, 0));
-		m_animationPath.setOpacity(0);
-		//m_animationPath.getElements().add(new LineTo(Constants.PATH_LENGTH, 0));
-		//GridPane.setConstraints(m_animationPath, 1, 7, 6, 1);
-		//m_animationGroup.getChildren().add(m_animationPath);
-		//m_animationGroup.getChildren().add(sensor);
-
-		PathTransition pt = new PathTransition();
-
-		pt.setDuration(Duration.seconds(8.0));
-		pt.setDelay(Duration.seconds(.5));
-		pt.setPath(m_animationPath);
-		pt.setNode(sensor);
-		pt.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-		pt.setCycleCount(1);
-		m_animationGroup.getChildren().add(sensor);
-		pt.playFromStart();
-		*/
-
-		// Testing Rightward Movement of Sensor ----------------------------------------------
-		TranslateTransition tt = new TranslateTransition();
-		tt.setNode(sensor);
-		tt.setFromX(500);
+		///TranslateTransition tt = new TranslateTransition();
+		///tt.setNode(sensor);
+		///tt.setFromX(500);
 
 
-		tt.setToX(0);
+		///tt.setToX(0);
 
 
-		tt.setCycleCount(1);
-		tt.setDuration(Duration.seconds(8.0));
+		///tt.setCycleCount(1);
+		///tt.setDuration(Duration.seconds(8.0));
 		//tt.setDelay(Duration.seconds(0.5));
-		tt.play();
+		//tt.play();
+		
+		////TranslateTransition tt2 = new TranslateTransition();
+		///tt2.setNode(rect2);
+		///tt2.setFromX(0);
+
+
+		///tt2.setToX(500);
+
+
+		///tt2.setCycleCount(1);
+		///tt2.setDuration(Duration.seconds(8.0));
+		//tt.setDelay(Duration.seconds(0.5));
+		///tt.play();
+		///tt2.play();
+		
+		
+		// TEMPORARY EXPERIMENTAL | DEC 10 ----------------------------------------------
+		/*
+		System.out.println("in experimental code");
+		
+		m_animationGrid = new GridPane();
+		
+		ArrayList<Shape> animationElements = new ArrayList<Shape>();
+		ArrayList<TranslateTransition> translations = new ArrayList<TranslateTransition>();
+		
+		for(Sensor sensor : m_simulation.getSensors())
+		{
+			System.out.println("hello");
+			sensor.moveTo(0);
+			m_animationGrid.getChildren().add(sensor.getVisualSensor());
+			
+		}
+	
+		
+		
+		
+		Line unitInterval = new Line();
+		unitInterval.setStartX(0);
+		unitInterval.setEndX(1000);
+		animationElements.add(unitInterval);
+		
+		m_animationGrid.getChildren().add(unitInterval);
+		m_grid.getChildren().add(m_animationGrid);
+		GridPane.setConstraints(m_animationGrid, 0, 8, 8, 1);
+		
+		for(Sensor sensor : m_simulation.getSensors())
+		{
+			TranslateTransition tt = new TranslateTransition();
+			tt.setNode(sensor.getVisualSensor());
+			tt.setFromX(sensor.getStartCenter()*1000);
+
+
+			tt.setToX(0);
+
+
+			tt.setCycleCount(1);
+			tt.setDuration(Duration.seconds(8.0));
+			//tt.setDelay(Duration.seconds(0.5));
+			translations.add(tt);
+		}
+		
+		for(TranslateTransition animation : translations)
+		{
+			animation.play();
+		}
+		*/
+		// END OF TEMPORARY EXPERIMENTAL ------------------------------------------------
 
 
 

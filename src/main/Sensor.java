@@ -22,7 +22,7 @@ public class Sensor
 	private double m_center;
 	private double m_startingCenter;
 	private double m_radius;
-	private Rectangle m_visualSensor;
+	public Rectangle m_visualSensor;
 	
 	private TranslateTransition m_animation;
 	private ToolBelt m_toolBelt;
@@ -36,7 +36,7 @@ public class Sensor
 		double i_startPosition
 		)
 	{
-		//System.out.println("-- Sensor center: " + i_initialCenter);
+		System.out.println("-- Sensor radius: " + i_sensorRadius);
 			
 		m_radius = i_sensorRadius;
 		m_center = i_startPosition;
@@ -90,10 +90,19 @@ public class Sensor
 	}
 	
 	
+	
 	public double getRadius()
 	{
 		return m_radius;
 	}
+	
+	
+	
+	public double getScaledWidth()
+	{
+		return (m_radius + m_radius) * Constants.SCALE_BY;
+	}
+	
 	
 	
 	public Rectangle getVisualSensor()
@@ -110,6 +119,8 @@ public class Sensor
 		double scaledPosition = m_toolBelt.calculateScaledPosition(i_position);
 		
 		m_animation.setToX(scaledPosition);
+		
+		m_center = i_position;
 	}
 	
 	
@@ -126,6 +137,8 @@ public class Sensor
 		double scaledRadius = m_toolBelt.calculateScaledRadius(m_radius);
 		
 		m_visualSensor = new Rectangle(scaledRadius, Constants.SENSOR_HEIGHT);
+		
+		System.out.println("-- rectangle sensor created");
 	}
 	
 	private void initializeAnimationPath()

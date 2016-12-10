@@ -30,7 +30,7 @@ public class Simulation
 	
 	public Simulation(
 		int i_numOfSensors,
-		float i_sensorRadius,
+		double i_sensorRadius,
 		String i_algorithm
 		)
 	{
@@ -39,8 +39,6 @@ public class Simulation
 		m_algorithmName = new String(i_algorithm);
 		
 		animationGoOrNoGo(m_numOfSensors);
-		
-		calculateSensorRadius();
 		
 		m_sensors = new ArrayList<Sensor>();
 		
@@ -85,15 +83,6 @@ public class Simulation
 	
 	// ----------------------------------------------------------------------------------
 	// Helper Functions
-	
-	private void calculateSensorRadius()
-	{
-		// Do some calculation using m_numOfSensors, I don't know the actual formula :P
-		
-		m_sensorRadius = m_numOfSensors/(2*m_numOfSensors);
-	}
-	
-	
 	
 	private void animationGoOrNoGo(
 		int i_numOfSensors
