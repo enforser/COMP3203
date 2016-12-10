@@ -8,6 +8,9 @@ package utilities;
 
 public final class Constants 
 {
+	// ----------------------------------------------------------------------------------
+	// Final Constants
+	
 	public static final float INTERVAL_MIN = 0;
 	public static final float INTERVAL_MAX = 1;
 	
@@ -17,4 +20,10 @@ public final class Constants
 	public static final int SCENE_HEIGHT = 400;
 	
 	public static final int MAX_SENSORS_ANIME = 20;
+	
+	// ----------------------------------------------------------------------------------
+	// Constants
+	
+	public static double SCALE_BY = 1000;
+	
 }

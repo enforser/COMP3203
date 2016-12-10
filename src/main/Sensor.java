@@ -7,6 +7,8 @@
 package main;
 
 import javafx.animation.TranslateTransition;
+import javafx.util.Duration;
+import utilities.ToolBelt;
 
 public class Sensor 
 {
@@ -18,6 +20,7 @@ public class Sensor
 	private double m_center;
 	private double m_startingCenter;
 	private TranslateTransition m_animation;
+	private ToolBelt m_toolBelt;
 	
 	// ----------------------------------------------------------------------------------
 	// Constructor
@@ -41,6 +44,7 @@ public class Sensor
 		
 		if (i_hasAnimation)
 		{
+			m_toolBelt = new ToolBelt();
 			initializeAnimationPath();
 		}
 	}
@@ -53,19 +57,27 @@ public class Sensor
 		return m_distanceToZero;
 	}
 	
+	
+	
 	public double getDistanceToOne()
 	{
 		return m_distanceToOne;
 	}
+	
+	
 	
 	public double getCenter()
 	{
 		return m_center;
 	}
 	
+	
+	
 	public double getStartCenter(){
 		return this.m_startingCenter;
 	}
+	
+	
 	
 	public void setCenter(
 		double i_position
@@ -74,15 +86,33 @@ public class Sensor
 		m_center = i_position;
 	}
 	
+	
+	
+	public void moveTo(
+		double i_position
+		)
+	{
+		double scaledPosition = m_toolBelt.calculateScaledPosition(i_position);
+		
+		m_animation.setToX(scaledPosition);
+	}
+	
+	
+	public void move()
+	{
+		m_animation.play();
+	}
+	
 	// ----------------------------------------------------------------------------------
 	// Helper Functions
 	
 	private void initializeAnimationPath()
 	{
-		m_animation = new TranslateTransition();
-		// initialPosition = ToolBelt.getScaledPosition(intialValue);
-		//m_animation.setFromX();
+		double initialPosition = m_toolBelt.calculateScaledPosition(m_startingCenter);
 		
+		m_animation = new TranslateTransition();
+		m_animation.setDuration(Duration.seconds(8));
+		m_animation.setFromX(initialPosition);
 	}
 }
 

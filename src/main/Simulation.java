@@ -38,7 +38,7 @@ public class Simulation
 		m_sensorRadius = i_sensorRadius;
 		m_algorithmName = new String(i_algorithm);
 		
-		animationGoNoGo(m_numOfSensors);
+		animationGoOrNoGo(m_numOfSensors);
 		
 		calculateSensorRadius();
 		
@@ -55,20 +55,28 @@ public class Simulation
 		return m_numOfSensors;
 	}
 		
+	
+	
 	public double getSensorRadius()
 	{
 		return m_sensorRadius;
 	}
 	
+	
+	
 	public String getAlgorithmName()
 	{
 		return m_algorithmName;
 	}
-		
+	
+	
+	
 	public ArrayList<Sensor> getSensors()
 	{
 		return m_sensors;
 	}
+	
+	
 	
 	public boolean hasAnimation()
 	{
@@ -85,7 +93,9 @@ public class Simulation
 		m_sensorRadius = m_numOfSensors/(2*m_numOfSensors);
 	}
 	
-	private void animationGoNoGo(
+	
+	
+	private void animationGoOrNoGo(
 		int i_numOfSensors
 		)
 	{
@@ -94,6 +104,8 @@ public class Simulation
 			m_hasAnimation = true;
 		}
 	}
+	
+	
 	
 	private void generateSensors()
 	{
