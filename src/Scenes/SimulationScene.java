@@ -185,10 +185,15 @@ public class SimulationScene
 		
 		m_viewDataButton = new Button("View Data");
 		m_viewDataButton.setTooltip(new Tooltip("Click to view data and graph"));
-		m_viewDataButton.setDisable(true);
+		//m_viewDataButton.setDisable(true);
 		m_viewDataButton.setOnMouseReleased(e ->{
 			System.out.println("-- View Data button was clicked");
 			// open graph scene
+			Stage graphWindow = new Stage();
+			graphWindow.initModality(Modality.APPLICATION_MODAL);
+			GraphScene graph = new GraphScene();		
+            graphWindow.setScene(graph.getGraphScene());
+            graphWindow.show();
 		});
 		GridPane.setConstraints(m_viewDataButton, 2, 4);
 	}

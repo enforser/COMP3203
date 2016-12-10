@@ -46,7 +46,5 @@ public class Graphing {
 		    series.getData().add(new XYChart.Data(x.getKey(),x.getValue()));
 		}
 		lineChart.getData().add(series);
-	}
-	
-	
+	}	
 }

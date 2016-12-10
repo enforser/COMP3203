@@ -23,27 +23,15 @@ public class GraphScene {
 	private final int SCENE_WIDTH = 600;
 	private final int SCENE_HEIGHT = 500;
 	
-	private Scene returnScene;
-	private Stage window;
-	
 	//Graphing Pane
 	private VBox graphPane;
 	private Graphing graph;
-	private Button homeButton;
 	private Separator line;
 	
 	//Constructor -------------------------------------------------------------
 	public GraphScene(){
 		createMainElements();
 		createMainScene();
-	}
-	
-	public GraphScene(Scene rs, Stage w){
-		returnScene = rs;
-		window = w;
-		createMainElements();
-		createMainScene();
-		
 	}
 	
 	//Methods -----------------------------------------------------------------
@@ -60,23 +48,14 @@ public class GraphScene {
 		line = new Separator();
 		graph = new Graphing();
 		graphPane = new VBox();
-		homeButton = new Button("Return");
 	}
 	
 	private void createMainScene(){
-		//Graph Pane
-		
-		homeButton.setOnAction(e -> {
-			if(window != null && returnScene != null){
-				System.out.println("-- return button was clicked");
-				window.setScene(returnScene);
-			}
-		});
-		
+		//Graph Pane	
 		graphPane.setSpacing(5);
 		graphPane.setAlignment(Pos.CENTER);
 		graphPane.setPadding(new Insets(10, 10, 10, 10));
-		graphPane.getChildren().addAll(graph.getLChart(),line,homeButton);
+		graphPane.getChildren().addAll(graph.getLChart());
 		
 		graphScene = new Scene(graphPane,SCENE_WIDTH, SCENE_HEIGHT);
 	}
