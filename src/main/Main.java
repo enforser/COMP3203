@@ -24,7 +24,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 	// ----------------------------------------------------------------------------------
 	// Properties
 	
-	Button m_buttonOne;
+	Button m_testButton;
 	Button m_buttonTwo;
 	Button m_buttonThree;
 	
@@ -43,21 +43,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 	{
 		System.out.println("-- In main() method"); 
 		System.out.println("-- calling launch()");
-	/*
-	 * The following commented out code is an example of how to run the algorithm defined in the Algorithm class. 
-	 * 
-	 * */
-		//Algorithm constructor takes number of sensors, and the radius of the sensors. 
 	
-	
-		OverlapAlgorithm algo;
-		int runTimes = 200;
-		double movement = 0;
-		for (int i = 0; i < runTimes; i++) {
-			algo = new OverlapAlgorithm(7, 0.1);
-			movement += algo.run();
-		}
-		System.out.println("Average movement of " + runTimes + " runs is: " + movement/runTimes);
 		
 		launch(args);
 	}
@@ -95,7 +81,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 	@Override
 	public void handle(ActionEvent event) 
 	{
-		if (event.getSource() == m_buttonOne)
+		if (event.getSource() == m_testButton)
 		{
 			System.out.println("-- buttonOne was clicked, in handle() method");
 		}
@@ -111,8 +97,11 @@ public class Main extends Application implements EventHandler<ActionEvent>
 	
 	private void createButtons()
 	{
-		m_buttonOne = new Button("Button One");
-		m_buttonOne.setOnAction(e -> System.out.println("-- buttonOne was clicked"));
+		m_testButton = new Button("Run Tests");
+		m_testButton.setOnAction(e -> {
+			System.out.println("-- Run Tests button was clicked");
+			runTests();
+		});
 		
 		m_buttonTwo = new Button("Simulation Scene");
 		m_buttonTwo.setOnAction(e -> {
@@ -135,10 +124,29 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		createButtons();
 		
 		HBox hbox = new HBox(20);
-		hbox.getChildren().addAll(titleLabel, m_buttonOne, m_buttonTwo, m_buttonThree);
+		hbox.getChildren().addAll(titleLabel, m_testButton, m_buttonTwo, m_buttonThree);
 		
 		// Create the scene
 		m_scene1 = new Scene(hbox, 600, 500);
+	}
+	
+	private void runTests()
+	{
+		/*
+		 * The following commented out code is an example of how to run the algorithm defined in the Algorithm class. 
+		 * 
+		 * */
+			//Algorithm constructor takes number of sensors, and the radius of the sensors. 
+		
+		
+			OverlapAlgorithm algo;
+			int runTimes = 200;
+			double movement = 0;
+			for (int i = 0; i < runTimes; i++) {
+				algo = new OverlapAlgorithm(7, 0.1);
+				movement += algo.run();
+			}
+			System.out.println("Average movement of " + runTimes + " runs is: " + movement/runTimes);
 	}
 }
 
