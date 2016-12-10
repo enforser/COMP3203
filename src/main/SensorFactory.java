@@ -14,7 +14,7 @@ public class SensorFactory
 	private RandomPositionGenerator m_randomPositionGenerator;
 	
 	// ----------------------------------------------------------------------------------
-	// Constructor
+	// Constructors
 	
 	SensorFactory()
 	{
@@ -23,15 +23,17 @@ public class SensorFactory
 	
 	// ----------------------------------------------------------------------------------
 	// Methods
-	
+		
 	public Sensor createSensor(
+		double i_radius,
 		boolean i_hasAnimation
 		)
-	{	
-		double randomPosition = m_randomPositionGenerator.generateRandomPosition();
+	{
+		double randomStartPosition = m_randomPositionGenerator.generateRandomPosition();
 		
-		Sensor sensor = new Sensor(randomPosition, i_hasAnimation);
+		Sensor sensor = new Sensor(i_radius, i_hasAnimation, randomStartPosition);
 		
 		return sensor;
+		
 	}
 }

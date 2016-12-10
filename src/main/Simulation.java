@@ -113,7 +113,7 @@ public class Simulation
 				
 		for (int i = 0; i < m_numOfSensors; i++)
 		{
-			Sensor sensor = sensorFactory.createSensor(m_hasAnimation);
+			Sensor sensor = sensorFactory.createSensor(m_sensorRadius, m_hasAnimation);
 			m_sensors.add(sensor);
 		}
 		

@@ -21,6 +21,8 @@ public final class Constants
 	
 	public static final int MAX_SENSORS_ANIME = 20;
 	
+	public static final double SENSOR_HEIGHT = 5;
+	
 	// ----------------------------------------------------------------------------------
 	// Constants
 	

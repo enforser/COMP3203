@@ -271,6 +271,7 @@ public class SimulationScene
 	private void constructAnimationPath()
 	{
 		Rectangle sensor = new Rectangle(20, 5);
+		Rectangle sensors = new Rectangle()
 		
 		Line unitInterval = new Line();
 		
