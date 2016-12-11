@@ -150,8 +150,10 @@ public class Simulation
 		AlgorithmController rigid = new AlgorithmController("RIGID_COVERAGE");
         AlgorithmController simple = new AlgorithmController("SIMPLE_COVERAGE");
         AlgorithmController overlap = new AlgorithmController("OVERLAP_COVERAGE");
+        AlgorithmController split = new AlgorithmController("SPLIT_COVERAGE");
         
         m_graphingScene.getGraph().createSeries("RigidAlgorithm",rigid.buildHashMap(GRAPH_RUNTIMES,getNumOfSensors(),getSensorRadius()));
+        m_graphingScene.getGraph().createSeries("SplitAlgorithm",split.buildHashMap(GRAPH_RUNTIMES,getNumOfSensors(),getSensorRadius()));
         m_graphingScene.getGraph().createSeries("SimpleAlgorithm",simple.buildHashMap(GRAPH_RUNTIMES,getNumOfSensors(),getSensorRadius()));
         m_graphingScene.getGraph().createSeries("OverlapAlgorithm",overlap.buildHashMap(GRAPH_RUNTIMES,getNumOfSensors(),getSensorRadius()));
 	}

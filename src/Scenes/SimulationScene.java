@@ -181,15 +181,15 @@ public class SimulationScene
 		m_simpleRadio.setUserData(AlgorithmType.SIMPLE_COVERAGE);
 		GridPane.setConstraints(m_simpleRadio, 1, 3, 2, 1);
 		
-		m_overlapRadio = new RadioButton("Overlap Coverage");
-		m_overlapRadio.setToggleGroup(m_toggleGroup);
-		m_overlapRadio.setUserData(AlgorithmType.OVERLAP_COVERAGE);
-		GridPane.setConstraints(m_overlapRadio, 4, 3, 2, 1);
-		
 		m_splitRadio = new RadioButton("Split Coverage");
 		m_splitRadio.setToggleGroup(m_toggleGroup);
 		m_splitRadio.setUserData(AlgorithmType.SPLIT_COVERAGE);
 		GridPane.setConstraints(m_splitRadio, 2, 3, 2, 1);
+		
+		m_overlapRadio = new RadioButton("Overlap Coverage");
+		m_overlapRadio.setToggleGroup(m_toggleGroup);
+		m_overlapRadio.setUserData(AlgorithmType.OVERLAP_COVERAGE);
+		GridPane.setConstraints(m_overlapRadio, 4, 3, 2, 1);
 
 		m_confirmInputButton = new Button("Confirm Input");
 		m_confirmInputButton.setTooltip(new Tooltip("Click to start simulation"));
