@@ -117,17 +117,17 @@ public class Main extends Application implements EventHandler<ActionEvent>
 	private void runTests()
 	{
 		/*
-		 * The following commented out code is an example of how to run the algorithm defined in the Algorithm class. 
+		 * The following is a demonstration to view the output of the algorithms in the console. 
 		 * 
-		 * */
-			//Algorithm constructor takes number of sensors, and the radius of the sensors. 
+		 * It covers Rigid, Simple, Overlap, and Split. 
+		 */
 		
 		
 			RigidAlgorithm algoR;
 			SimpleAlgorithm algoS;
 			OverlapAlgorithm algoO;
 			SplitAlgorithm algoSP;
-			int runTimes = 200;
+			int runTimes = 300;
 			double[] movement = {0, 0, 0, 0};
 			int numSensors = 5;
 			double radius = 0.1;
@@ -144,7 +144,12 @@ public class Main extends Application implements EventHandler<ActionEvent>
 				movement[2] += algoO.run();
 				movement[3] += algoSP.run();
 			}
-			System.out.println("\n\n\n\nRun Times: " + runTimes + "\n----------------------------------");
+			
+			//PRINT OUT RESULTS OF THE TEST
+			System.out.println("\n\n\n\n   Run Times:          " + runTimes);
+			System.out.println("   Number of Sensors:  " + numSensors);
+			System.out.println("   Radius:             " + radius);
+			System.out.println("   ----------------------------------------");
 			System.out.println("   Rigid Algorithm:     " + movement[0]/runTimes);
 			System.out.println("   Simple Algorithm:    " + movement[1]/runTimes);
 			System.out.println("   Overlap Algorithm:   " + movement[2]/runTimes);
