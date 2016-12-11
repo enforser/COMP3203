@@ -69,6 +69,8 @@ public class SimulationScene
 	private ToggleGroup m_toggleGroup;
 	private RadioButton m_rigidRadio;
 	private RadioButton m_simpleRadio;
+	private RadioButton m_overlapRadio;
+	private RadioButton m_splitRadio;
 
 	private Button m_confirmInputButton;
 	private Button m_runSimulationButton;
@@ -130,6 +132,8 @@ public class SimulationScene
 				m_separator,
 				m_rigidRadio,
 				m_simpleRadio,
+				m_overlapRadio,
+				m_splitRadio,
 				m_confirmInputButton,
 				m_runSimulationButton,
 				m_viewDataButton);
@@ -164,7 +168,17 @@ public class SimulationScene
 		m_simpleRadio = new RadioButton("Simple Coverage");
 		m_simpleRadio.setToggleGroup(m_toggleGroup);
 		m_simpleRadio.setUserData(AlgorithmType.SIMPLE_COVERAGE);
-		GridPane.setConstraints(m_simpleRadio, 2, 3, 2, 1);
+		GridPane.setConstraints(m_simpleRadio, 1, 3, 2, 1);
+		
+		m_overlapRadio = new RadioButton("Overlap Coverage");
+		m_overlapRadio.setToggleGroup(m_toggleGroup);
+		m_overlapRadio.setUserData(AlgorithmType.OVERLAP_COVERAGE);
+		GridPane.setConstraints(m_overlapRadio, 4, 3, 2, 1);
+		
+		m_splitRadio = new RadioButton("Split Coverage");
+		m_splitRadio.setToggleGroup(m_toggleGroup);
+		m_splitRadio.setUserData(AlgorithmType.SPLIT_COVERAGE);
+		GridPane.setConstraints(m_splitRadio, 2, 3, 2, 1);
 
 		m_confirmInputButton = new Button("Confirm Input");
 		m_confirmInputButton.setTooltip(new Tooltip("Click to start simulation"));
@@ -293,7 +307,7 @@ public class SimulationScene
 			tt.setNode(rect);
 			tt.setFromX(sensor.getStartCenter()*1000);
 			tt.setToX(0);
-			// tt.setToX(sensor.getCenter()*1000);
+			tt.setToX(sensor.getCenter()*1000);
 
 
 			tt.setCycleCount(1);

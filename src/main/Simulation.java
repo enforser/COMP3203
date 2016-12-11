@@ -116,7 +116,25 @@ public class Simulation
 		String i_algorithmName
 		)
 	{
-		// algorithm name == something
-		// call algorithm something.....
+		if(i_algorithmName.equals(AlgorithmType.SIMPLE_COVERAGE.toString())) {
+			SimpleAlgorithm algo = new SimpleAlgorithm(this);
+			algo.run();
+		}
+		else if(i_algorithmName.equals(AlgorithmType.RIGID_COVERAGE.toString())) {
+			RigidAlgorithm algo = new RigidAlgorithm(this);
+			algo.run();
+		}
+		else if(i_algorithmName.equals(AlgorithmType.OVERLAP_COVERAGE.toString())) {
+			OverlapAlgorithm algo = new OverlapAlgorithm(this);
+			algo.run();
+		}
+		else if (i_algorithmName.equals(AlgorithmType.SPLIT_COVERAGE.toString())) {
+			SplitAlgorithm algo = new SplitAlgorithm(this);
+			algo.run();
+		}
+		else {
+			System.out.println("-- Selected Invalid Algorithm");
+			//an algorithm was requested that does not exist
+		}
 	}
 }

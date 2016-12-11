@@ -144,11 +144,11 @@ public class Main extends Application implements EventHandler<ActionEvent>
 				movement[2] += algoO.run();
 				movement[3] += algoSP.run();
 			}
-			
+
 			//PRINT OUT RESULTS OF THE TEST
-			System.out.println("\n\n\n\n   Run Times:          " + runTimes);
-			System.out.println("   Number of Sensors:  " + numSensors);
-			System.out.println("   Radius:             " + radius);
+			System.out.println("\n\n\n\n   Run Times:           " + runTimes);
+			System.out.println("   Number of Sensors:   " + numSensors);
+			System.out.println("   Radius:              " + radius);
 			System.out.println("   ----------------------------------------");
 			System.out.println("   Rigid Algorithm:     " + movement[0]/runTimes);
 			System.out.println("   Simple Algorithm:    " + movement[1]/runTimes);

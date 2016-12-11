@@ -25,7 +25,7 @@ public class SimpleAlgorithm extends Algorithm {
 	    });
 			
 		//initial movement
-		if (sensors.get(0).getCenter() < radius) {
+		if (sensors.get(0).getCenter() > radius) {
 			totalMovement += sensors.get(0).moveTo(radius);
 		}
 		

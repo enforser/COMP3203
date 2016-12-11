@@ -115,7 +115,9 @@ public class InputVerifier
 		Object choice = i_toggleGroup.getSelectedToggle().getUserData();
 		
 		if (!(choice.equals(AlgorithmType.RIGID_COVERAGE) || 
-				choice.equals(AlgorithmType.SIMPLE_COVERAGE)))
+				choice.equals(AlgorithmType.SIMPLE_COVERAGE) ||
+				choice.equals(AlgorithmType.OVERLAP_COVERAGE) ||
+				choice.equals(AlgorithmType.SPLIT_COVERAGE)))
 		{
 			throw new InvalidChoiceException("ERROR: Invalid choice!");
 		}
