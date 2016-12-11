@@ -39,8 +39,6 @@ public class SplitAlgorithm {
 		int prevRightID, prevLeftID;
 		
 		//set left most and right most to respective edges
-		//totalMovement += Math.abs(sensors.get(rightID).getCenter() - (1 - radius));
-		//totalMovement += Math.abs(sensors.get(leftID).getCenter() - (radius));
 		totalMovement += sensors.get(rightID).moveTo(1- radius);
 		totalMovement += sensors.get(leftID).moveTo(radius);
 		
@@ -62,11 +60,6 @@ public class SplitAlgorithm {
 			else {
 				
 				//update the movement taking place
-				//totalMovement += Math.abs(sensors.get(rightID).getCenter() 
-				//		- (sensors.get(prevRightID).getCenter() - (radius*2)));
-				//totalMovement += Math.abs(sensors.get(leftID).getCenter() 
-				//		- (sensors.get(prevLeftID).getCenter() + (radius*2)));
-				
 				//update the sensor objects being moved
 				totalMovement += sensors.get(rightID).moveTo(
 						sensors.get(prevRightID).getCenter() - (radius*2));
