@@ -43,6 +43,8 @@ public class Simulation
 		m_sensors = new ArrayList<Sensor>();
 		
 		generateSensors();
+		
+		callAlgorithm(m_algorithmName);
 	}
 	
 	// ----------------------------------------------------------------------------------
@@ -107,5 +109,14 @@ public class Simulation
 		}
 		
 		System.out.println("-- " + m_numOfSensors + " sensors created!");
+	}
+	
+	
+	private void callAlgorithm(
+		String i_algorithmName
+		)
+	{
+		// algorithm name == something
+		// call algorithm something.....
 	}
 }
