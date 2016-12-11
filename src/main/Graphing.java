@@ -17,9 +17,11 @@ public class Graphing {
 	//Attributes --------------------------------------------------------------
 	NumberAxis xAxis, yAxis;
 	LineChart<Number,Number> lineChart;
+	String name;
 	
 	//Constructor -------------------------------------------------------------
 	public Graphing(){
+		this.name = "Radius Vs. Total Movement";
 		createGraphingScene();
 	}
 	
@@ -32,7 +34,11 @@ public class Graphing {
         yAxis.setLabel("Total Movement");
         
         lineChart = new LineChart<Number,Number>(xAxis,yAxis);
-        lineChart.setTitle("Radius Vs. Movement Relationships");    
+        lineChart.setTitle(this.name);    
+	}
+	
+	public void setNumSensor(int n){
+		lineChart.setTitle(this.name + " with " + n + " sensors");   
 	}
 
 	public LineChart<Number,Number> getLChart(){

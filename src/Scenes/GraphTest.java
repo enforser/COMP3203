@@ -7,17 +7,32 @@ import main.Graphing;
 
 public class GraphTest extends Application{
 	@Override public void start(Stage stage) {
-    	HashMap<Double,Double> dataSeries = new HashMap<Double, Double>(); 
-    	dataSeries.put(0.8,0.28);
-    	dataSeries.put(0.1,0.84);
-    	dataSeries.put(0.5,0.38);
-    	dataSeries.put(0.34,0.45);
+    	HashMap<Double,Double> dataSeries1 = new HashMap<Double, Double>(); 
+    	dataSeries1.put(Math.random(),Math.random());
+    	dataSeries1.put(Math.random(),Math.random());
+    	dataSeries1.put(Math.random(),Math.random());
+    	dataSeries1.put(Math.random(),Math.random());
+    	
+    	HashMap<Double,Double> dataSeries2 = new HashMap<Double, Double>(); 
+    	dataSeries2.put(Math.random(),Math.random());
+    	dataSeries2.put(Math.random(),Math.random());
+    	dataSeries2.put(Math.random(),Math.random());
+    	dataSeries2.put(Math.random(),Math.random());
+    	
+    	HashMap<Double,Double> dataSeries3 = new HashMap<Double, Double>(); 
+    	dataSeries3.put(Math.random(),Math.random());
+    	dataSeries3.put(Math.random(),Math.random());
+    	dataSeries3.put(Math.random(),Math.random());
+    	dataSeries3.put(Math.random(),Math.random());
     	
         stage.setTitle("Comp3203");
         
         GraphScene graph = new GraphScene();
-        graph.getGraph().createSeries("#S=1",dataSeries);
+        graph.getGraph().createSeries("RigidAlgorithm",dataSeries1);
+        graph.getGraph().createSeries("SimpleAlgorithm",dataSeries2);
+        graph.getGraph().createSeries("OverlapAlgorithm",dataSeries3);
         
+        graph.getGraph().setNumSensor(10);
         stage.setScene(graph.getGraphScene());
         
         stage.show();       
