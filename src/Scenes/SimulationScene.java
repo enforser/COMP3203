@@ -54,7 +54,8 @@ public class SimulationScene
 	private InputVerifier m_inputVerifier;
 	private Simulation m_simulation;
 	
-	private final int GRAPH_RUNTIMES = 20; 
+	//This constant dictates how many runs would be average for each point on the graph 
+	private final int GRAPH_RUNTIMES = 50; 
 
 	// ----------------------------------------------------------------------------------
 	// GUI Properties
@@ -233,6 +234,8 @@ public class SimulationScene
 	}
 	
 	private void generateGraphData(){
+		m_graphingScene.getGraph().setNumSensor(m_simulation.getNumOfSensors());
+		
 		AlgorithmController rigid = new AlgorithmController("RIGID_COVERAGE");
         AlgorithmController simple = new AlgorithmController("SIMPLE_COVERAGE");
         AlgorithmController overlap = new AlgorithmController("OVERLAP_COVERAGE");

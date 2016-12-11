@@ -8,6 +8,11 @@ public class AlgorithmController {
 
 	private String algoType;
 	
+	//This constant dictates the min/max of the graphs intervals (radius +/- scale where 0 < intervals < 1)
+	private final int INTERVAL_SCALE = 10;
+	//This constant dictates how intervals between the radius and the min/max
+	private final int INTERVAL_DIVISION = 20;
+	
 	public AlgorithmController(String algorithmType) {
 		this.algoType = algorithmType;
 	}
@@ -47,11 +52,12 @@ public class AlgorithmController {
 		return totalMovement/runTimes;
 	}
 	
+	//returns an array with intervals indicating the x axis(radiuses) where 0 < interval < 1
     public ArrayList<Double> generateGraphIntervals(double rad){
     	ArrayList<Double> list = new ArrayList<Double>();  	
-    	double interval = ((rad*2)-rad)/10;  	
+    	double interval = ((rad*INTERVAL_SCALE)-rad)/INTERVAL_DIVISION;  	
     	list.add(rad); 	
-    	for(int i=0; i<10;i++){
+    	for(int i=0; i<INTERVAL_DIVISION;i++){
     		if(rad-(interval*(i+1)) > 0.0){
     			list.add(rad-(interval*(i+1)));
     		}
