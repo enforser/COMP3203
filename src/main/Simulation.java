@@ -140,6 +140,9 @@ public class Simulation
 		String i_algorithmName
 		)
 	{
+		
+		AlgorithmController ac;
+		
 		if(i_algorithmName.equals(AlgorithmType.SIMPLE_COVERAGE.toString())) {
 			SimpleAlgorithm algo = new SimpleAlgorithm(this);
 			algo.run();
@@ -160,5 +163,8 @@ public class Simulation
 			System.out.println("-- Selected Invalid Algorithm");
 			//an algorithm was requested that does not exist
 		}
+		
+		
+		
 	}
 }
