@@ -37,7 +37,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import main.AlgorithmController;
 import main.AlgorithmType;
+import main.Graphing;
 import main.InputVerifier;
 import main.Sensor;
 import main.Simulation;
@@ -51,12 +53,17 @@ public class SimulationScene
 
 	private InputVerifier m_inputVerifier;
 	private Simulation m_simulation;
+	
+	private final int GRAPH_RUNTIMES = 20; 
 
 	// ----------------------------------------------------------------------------------
 	// GUI Properties
 
 	private Scene m_simulationScene;
-
+	
+	private GraphScene m_graphingScene;
+	private Stage graphWindow;
+	
 	private GridPane m_grid;
 	private GridPane m_animationGrid;
 
@@ -114,6 +121,10 @@ public class SimulationScene
 	public Simulation getSimulation()
 	{
 		return m_simulation;
+	}
+	
+	public GraphScene getGraphingScene(){
+		return m_graphingScene;
 	}
 
 	// ----------------------------------------------------------------------------------
@@ -201,19 +212,36 @@ public class SimulationScene
 		
 		m_viewDataButton = new Button("View Data");
 		m_viewDataButton.setTooltip(new Tooltip("Click to view data and graph"));
-		//m_viewDataButton.setDisable(true);
+		m_viewDataButton.setDisable(true);
 		m_viewDataButton.setOnMouseReleased(e ->{
 			System.out.println("-- View Data button was clicked");
 			// open graph scene
-			Stage graphWindow = new Stage();
-			graphWindow.initModality(Modality.APPLICATION_MODAL);
-			GraphScene graph = new GraphScene();		
-            graphWindow.setScene(graph.getGraphScene());
-            graphWindow.show();
+			createGraphingStage();
 		});
 		GridPane.setConstraints(m_viewDataButton, 2, 4);
 	}
 
+	private void createGraphingStage(){
+		m_graphingScene = new GraphScene();
+		graphWindow = new Stage();
+		graphWindow.initModality(Modality.APPLICATION_MODAL);	
+		
+		generateGraphData();
+		
+        graphWindow.setScene(m_graphingScene.getGraphScene());
+        graphWindow.show();
+	}
+	
+	private void generateGraphData(){
+		AlgorithmController rigid = new AlgorithmController("RIGID_COVERAGE");
+        AlgorithmController simple = new AlgorithmController("SIMPLE_COVERAGE");
+        AlgorithmController overlap = new AlgorithmController("OVERLAP_COVERAGE");
+        
+        m_graphingScene.getGraph().createSeries("RigidAlgorithm",rigid.buildHashMap(GRAPH_RUNTIMES,m_simulation.getNumOfSensors(), m_simulation.getSensorRadius()));
+        m_graphingScene.getGraph().createSeries("SimpleAlgorithm",simple.buildHashMap(GRAPH_RUNTIMES,m_simulation.getNumOfSensors(), m_simulation.getSensorRadius()));
+        m_graphingScene.getGraph().createSeries("OverlapAlgorithm",overlap.buildHashMap(GRAPH_RUNTIMES,m_simulation.getNumOfSensors(), m_simulation.getSensorRadius()));
+	}
+	
 	private void attemptSimulation()
 	{
 		try
@@ -248,6 +276,8 @@ public class SimulationScene
 		System.out.println("-- You chose the: " + m_simulation.getAlgorithmName()
 							+ " algorithm");
 
+		enableButton(m_viewDataButton);
+		
 		if (m_simulation.getNumOfSensors() <= 20)
 		{
 			enableButton(m_runSimulationButton);

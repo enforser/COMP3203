@@ -111,31 +111,6 @@ public class Simulation
 		System.out.println("-- " + m_numOfSensors + " sensors created!");
 	}
 	
-	//not finished, needs clarification...
-	public void generateGraphData(){
-		HashMap<Double,Double> dataSeries = new HashMap<Double, Double>(); 
-		for(double interval : generateGraphIntervals(this.m_sensorRadius)){
-			//goes through all the indexes of the array and calculates the movement of each radius size
-			//add it to the hashmap
-		}
-	}
-	
-    public ArrayList<Double> generateGraphIntervals(double rad){
-    	ArrayList<Double> list = new ArrayList<Double>();  	
-    	double interval = ((rad*2)-rad)/10;  	
-    	list.add(rad); 	
-    	for(int i=0; i<10;i++){
-    		if(rad-(interval*(i+1)) > 0.0){
-    			list.add(rad-(interval*(i+1)));
-    		}
-    		if(rad+(interval*(i+1)) < 1.0){
-    			list.add(rad+(interval*(i+1)));
-    		}
-    	}
-    	Collections.sort(list);
-    	return list;
-    }   
-	
 	private void callAlgorithm(
 		String i_algorithmName
 		)

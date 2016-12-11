@@ -50,7 +50,7 @@ public class GraphTest extends Application{
         
        //END OF CHANGES MADE BY MATTHEW
         
-        graph.getGraph().setNumSensor(10);
+        graph.getGraph().setNumSensor(numSensors);
         stage.setScene(graph.getGraphScene());
         
         stage.show();       
