@@ -127,7 +127,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 			int runTimes = 200;
 			double movement = 0;
 			for (int i = 0; i < runTimes; i++) {
-				algo = new OverlapAlgorithm(7, 0.1);
+				algo = new OverlapAlgorithm(20, 0.025);
 				movement += algo.run();
 			}
 			System.out.println("Average movement of " + runTimes + " runs is: " + movement/runTimes);

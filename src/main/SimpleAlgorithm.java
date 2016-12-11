@@ -45,7 +45,6 @@ public class SimpleAlgorithm {
 		for (int ID = 1; ID < sensors.size(); ID++) {
 			
 			if (sensors.get(ID).getCenter() - sensors.get(ID - 1).getCenter() > 2*radius) {
-				//totalMovement += sensors.get(ID).getCenter() - (sensors.get(ID-1).getCenter() + (radius*2));
 				totalMovement += sensors.get(ID).moveTo(sensors.get(ID - 1).getCenter() + (2*radius));
 			}
 		}

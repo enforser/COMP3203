@@ -22,6 +22,7 @@ public class Sensor
 	private double m_center;
 	private double m_startingCenter;
 	private double m_radius;
+	private boolean m_hasAnimation;
 	public Rectangle m_visualSensor;
 	
 	private TranslateTransition m_animation;
@@ -43,11 +44,12 @@ public class Sensor
 		m_distanceToOne = 1 - i_startPosition;
 		m_distanceToZero = i_startPosition;	
 		m_startingCenter = i_startPosition;
-		
-		m_toolBelt = new ToolBelt();
+		m_hasAnimation = i_hasAnimation;
 			
 		if (i_hasAnimation)
 		{
+
+			m_toolBelt = new ToolBelt();
 			generateVisualSensor();
 			initializeAnimationPath();
 		}
@@ -112,16 +114,21 @@ public class Sensor
 	}
 	
 	
-	
+	/*
+	 *  moves the sensor to the new position
+	 *  returns the distance that the sensor has moved
+	 */
 	public double moveTo(
 		double i_position
 		)
 	{
+		//change sensors var
 		double distanceMoved = Math.abs(i_position - m_center);
-		//problem occurs on next line
-		double scaledPosition = m_toolBelt.calculateScaledPosition(i_position);
 		
-		//m_animation.setToX(scaledPosition);
+		if (m_hasAnimation) {
+			double scaledPosition = m_toolBelt.calculateScaledPosition(i_position);
+			m_animation.setToX(scaledPosition);
+		}
 		
 		m_center = i_position;
 		
