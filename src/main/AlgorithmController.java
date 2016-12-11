@@ -11,7 +11,7 @@ public class AlgorithmController {
 	//This constant dictates the min/max of the graphs intervals (radius +/- scale where 0 < intervals < 1)
 	private final int INTERVAL_SCALE = 10;
 	//This constant dictates how intervals between the radius and the min/max
-	private final int INTERVAL_DIVISION = 20;
+	private final int INTERVAL_DIVISION = 10;
 	
 	public AlgorithmController(String algorithmType) {
 		this.algoType = algorithmType;

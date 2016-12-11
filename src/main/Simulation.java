@@ -10,12 +10,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import Scenes.GraphScene;
 import utilities.Constants;
 
 public class Simulation 
 {
 	// ----------------------------------------------------------------------------------
 	// Properties
+	
+	//This constant dictates how many runs would be average for each point on the graph 
+	private final int GRAPH_RUNTIMES = 50; 
 	
 	private int m_numOfSensors;
 	
@@ -137,9 +141,18 @@ public class Simulation
 		else {
 			System.out.println("-- Selected Invalid Algorithm");
 			//an algorithm was requested that does not exist
-		}
+		}	
+	}
+	
+	public void generateGraphData(GraphScene m_graphingScene){
+		m_graphingScene.getGraph().setNumSensor(getNumOfSensors());
 		
-		
-		
+		AlgorithmController rigid = new AlgorithmController("RIGID_COVERAGE");
+        AlgorithmController simple = new AlgorithmController("SIMPLE_COVERAGE");
+        AlgorithmController overlap = new AlgorithmController("OVERLAP_COVERAGE");
+        
+        m_graphingScene.getGraph().createSeries("RigidAlgorithm",rigid.buildHashMap(GRAPH_RUNTIMES,getNumOfSensors(),getSensorRadius()));
+        m_graphingScene.getGraph().createSeries("SimpleAlgorithm",simple.buildHashMap(GRAPH_RUNTIMES,getNumOfSensors(),getSensorRadius()));
+        m_graphingScene.getGraph().createSeries("OverlapAlgorithm",overlap.buildHashMap(GRAPH_RUNTIMES,getNumOfSensors(),getSensorRadius()));
 	}
 }

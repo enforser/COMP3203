@@ -53,9 +53,6 @@ public class SimulationScene
 
 	private InputVerifier m_inputVerifier;
 	private Simulation m_simulation;
-	
-	//This constant dictates how many runs would be average for each point on the graph 
-	private final int GRAPH_RUNTIMES = 50; 
 
 	// ----------------------------------------------------------------------------------
 	// GUI Properties
@@ -226,23 +223,12 @@ public class SimulationScene
 		m_graphingScene = new GraphScene();
 		graphWindow = new Stage();
 		graphWindow.initModality(Modality.APPLICATION_MODAL);	
+		graphWindow.setTitle("COMP 3203A2 - Graph");
 		
-		generateGraphData();
+		m_simulation.generateGraphData(m_graphingScene);
 		
         graphWindow.setScene(m_graphingScene.getGraphScene());
         graphWindow.show();
-	}
-	
-	private void generateGraphData(){
-		m_graphingScene.getGraph().setNumSensor(m_simulation.getNumOfSensors());
-		
-		AlgorithmController rigid = new AlgorithmController("RIGID_COVERAGE");
-        AlgorithmController simple = new AlgorithmController("SIMPLE_COVERAGE");
-        AlgorithmController overlap = new AlgorithmController("OVERLAP_COVERAGE");
-        
-        m_graphingScene.getGraph().createSeries("RigidAlgorithm",rigid.buildHashMap(GRAPH_RUNTIMES,m_simulation.getNumOfSensors(), m_simulation.getSensorRadius()));
-        m_graphingScene.getGraph().createSeries("SimpleAlgorithm",simple.buildHashMap(GRAPH_RUNTIMES,m_simulation.getNumOfSensors(), m_simulation.getSensorRadius()));
-        m_graphingScene.getGraph().createSeries("OverlapAlgorithm",overlap.buildHashMap(GRAPH_RUNTIMES,m_simulation.getNumOfSensors(), m_simulation.getSensorRadius()));
 	}
 	
 	private void attemptSimulation()
