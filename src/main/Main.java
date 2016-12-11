@@ -31,10 +31,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 	Stage m_window;
 	
 	Scene m_scene1;
-	Scene m_graphingScene;
 	Scene m_simulationScene;
-	
-	GraphScene graph;
 	
 	// ----------------------------------------------------------------------------------
 	// Methods
@@ -59,19 +56,6 @@ public class Main extends Application implements EventHandler<ActionEvent>
 		createScene1();
 		SimulationScene simulationScene = new SimulationScene();
 		m_simulationScene = simulationScene.getSimulationScene();
-		
-		graph = new GraphScene(m_scene1,m_window);
-		
-		//This is temporary hardcoded data
-		HashMap<Float,Float> dataSeries = new HashMap<Float, Float>(); 
-    	dataSeries.put(0.8f,0.28f);
-    	dataSeries.put(0.1f,0.84f);
-    	dataSeries.put(0.5f,0.38f);
-    	dataSeries.put(0.34f,0.45f);
-    	graph.getGraph().createSeries("#S=1",dataSeries);
-		//--------------------------------
-    	
-		m_graphingScene = graph.getGraphScene();
 		
 		m_window.setScene(m_scene1);
 		m_window.show();
@@ -109,10 +93,10 @@ public class Main extends Application implements EventHandler<ActionEvent>
 			m_window.setScene(m_simulationScene);
 		});
 		 
-		m_buttonThree = new Button("Graphing Scene");
+		m_buttonThree = new Button("Button 3");
 		m_buttonThree.setOnAction(e -> {
 			System.out.println("-- buttonThree was clicked");
-			m_window.setScene(m_graphingScene);
+			//Button 3
 			}
 		);
 	}
