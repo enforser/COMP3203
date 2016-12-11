@@ -39,10 +39,10 @@ public class Graphing {
 		return lineChart;
 	}
 	
-	public void createSeries(String name,HashMap<Float,Float> dataSeries){		
+	public void createSeries(String name,HashMap<Double,Double> dataSeries){		
 		Series<Number, Number> series = new XYChart.Series();
 		series.setName(name);
-		for (HashMap.Entry<Float, Float> x : dataSeries.entrySet()) {;		    
+		for (HashMap.Entry<Double, Double> x : dataSeries.entrySet()) {;		    
 		    series.getData().add(new XYChart.Data(x.getKey(),x.getValue()));
 		}
 		lineChart.getData().add(series);

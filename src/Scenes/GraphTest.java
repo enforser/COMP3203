@@ -7,11 +7,11 @@ import main.Graphing;
 
 public class GraphTest extends Application{
 	@Override public void start(Stage stage) {
-    	HashMap<Float,Float> dataSeries = new HashMap<Float, Float>(); 
-    	dataSeries.put(0.8f,0.28f);
-    	dataSeries.put(0.1f,0.84f);
-    	dataSeries.put(0.5f,0.38f);
-    	dataSeries.put(0.34f,0.45f);
+    	HashMap<Double,Double> dataSeries = new HashMap<Double, Double>(); 
+    	dataSeries.put(0.8,0.28);
+    	dataSeries.put(0.1,0.84);
+    	dataSeries.put(0.5,0.38);
+    	dataSeries.put(0.34,0.45);
     	
         stage.setTitle("Comp3203");
         

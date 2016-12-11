@@ -8,6 +8,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 import utilities.Constants;
 
@@ -110,7 +111,16 @@ public class Simulation
 		System.out.println("-- " + m_numOfSensors + " sensors created!");
 	}
 	
-    public static ArrayList<Double> generateGraphIntervals(double rad){
+	//not finished, needs clarification...
+	public void generateGraphData(){
+		HashMap<Double,Double> dataSeries = new HashMap<Double, Double>(); 
+		for(double interval : generateGraphIntervals(this.m_sensorRadius)){
+			//goes through all the indexes of the array and calculates the movement of each radius size
+			//add it to the hashmap
+		}
+	}
+	
+    public ArrayList<Double> generateGraphIntervals(double rad){
     	ArrayList<Double> list = new ArrayList<Double>();  	
     	double interval = ((rad*2)-rad)/10;  	
     	list.add(rad); 	
