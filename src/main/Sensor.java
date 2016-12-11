@@ -6,7 +6,7 @@
 
 package main;
 
-import javafx.animation.TranslateTransition;
+import javafx.animation.TranslateTransition; 
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import utilities.Constants;
@@ -43,10 +43,11 @@ public class Sensor
 		m_distanceToOne = 1 - i_startPosition;
 		m_distanceToZero = i_startPosition;	
 		m_startingCenter = i_startPosition;
+		
+		m_toolBelt = new ToolBelt();
 			
 		if (i_hasAnimation)
 		{
-			m_toolBelt = new ToolBelt();
 			generateVisualSensor();
 			initializeAnimationPath();
 		}
@@ -112,15 +113,19 @@ public class Sensor
 	
 	
 	
-	public void moveTo(
+	public double moveTo(
 		double i_position
 		)
 	{
+		double distanceMoved = Math.abs(i_position - m_center);
+		//problem occurs on next line
 		double scaledPosition = m_toolBelt.calculateScaledPosition(i_position);
 		
-		m_animation.setToX(scaledPosition);
+		//m_animation.setToX(scaledPosition);
 		
 		m_center = i_position;
+		
+		return distanceMoved;
 	}
 	
 	

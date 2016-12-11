@@ -12,8 +12,9 @@ public class SimpleAlgorithm {
 	double totalMovement;
 	
 	public SimpleAlgorithm(int numSensors, double rad) {
+		//must set radius before sensors
+		radius = rad;
 		sensors = makeRandSensors(numSensors);
-		radius = rad; //Takes 20 sensors to cover entire interval. 
 		totalMovement = 0;
 	}
 	
@@ -36,7 +37,7 @@ public class SimpleAlgorithm {
 			
 		//initial movement
 		if (sensors.get(0).getCenter() < radius) {
-			sensors.get(0).setCenter(radius);
+			totalMovement += sensors.get(0).moveTo(radius);
 		}
 		
 		//move sensor if there is gap between it and the one to left of it
@@ -44,8 +45,8 @@ public class SimpleAlgorithm {
 		for (int ID = 1; ID < sensors.size(); ID++) {
 			
 			if (sensors.get(ID).getCenter() - sensors.get(ID - 1).getCenter() > 2*radius) {
-				totalMovement += sensors.get(ID).getCenter() - (sensors.get(ID-1).getCenter() + (radius*2));
-				sensors.get(ID).setCenter(sensors.get(ID - 1).getCenter() + (2*radius));
+				//totalMovement += sensors.get(ID).getCenter() - (sensors.get(ID-1).getCenter() + (radius*2));
+				totalMovement += sensors.get(ID).moveTo(sensors.get(ID - 1).getCenter() + (2*radius));
 			}
 		}
 		
