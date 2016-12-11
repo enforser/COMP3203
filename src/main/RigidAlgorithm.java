@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
+
 import main.Sensor;
 
 public class RigidAlgorithm {
@@ -17,14 +18,16 @@ public class RigidAlgorithm {
 	int numSensors;
 	
 	
-	public RigidAlgorithm(int numSensors, float rad) {
+	public RigidAlgorithm(int numSensors, double rad) {
 		sensors = makeRandSensors(numSensors);
 		this.numSensors = numSensors;
+		totalMovement = 0;
 		radius = rad;
 	}
-	
-	public void run() {
-		System.out.println("Running the Rigid Algorithm");
+
+	public double run() {
+
+        //System.out.println("Running the Simple Algorithm");
 		
 		Collections.sort(sensors, new Comparator<Sensor>() {
 	        @Override
@@ -32,50 +35,22 @@ public class RigidAlgorithm {
 	            return Double.compare(o1.getCenter(),o2.getCenter());
 	        }
 	    });
-		
-		printSensors();
-		
-		Sensor currSensor = null;
-		
-		currSensor = sensors.get(n);
-		
-		System.out.println("After the Algorithm");
-		
-		//check to see if the left most sensor is in the right place
-		if((currSensor.getCenter() - radius) != 0.0){
-			totalMovement = Math.abs(radius - currSensor.getCenter());
-			currSensor.setCenter(radius);
-			OccupiedCoordinate = currSensor.getCenter() + radius;
+			
+		//initial movement
+		if (sensors.get(0).getCenter() < radius) {
+			totalMovement += sensors.get(0).moveTo(radius);
 		}
 		
-		//Move the remaining sensors		
-		while(true){			
-			if(n >= this.numSensors || this.OccupiedCoordinate >= 1){
-				break;
+		//move sensor if there is gap between it and the one to left of it
+		//ignore overlap
+		for (int ID = 1; ID < sensors.size(); ID++) {
+			if (sensors.get(ID - 1).getCenter() + (2*radius) < 1) {
+				totalMovement += sensors.get(ID).moveTo(sensors.get(ID - 1).getCenter() + (2*radius));
 			}
-			
-			//find the immediate right sensor
-			currSensor = sensors.get(++n);
-			
-			if((currSensor.getCenter() - radius) == OccupiedCoordinate){
-				//we are at optimal location already...
-			}
-			else if((currSensor.getCenter() - radius) > OccupiedCoordinate){
-				//move the sensor
-				totalMovement += Math.abs((OccupiedCoordinate+radius) - currSensor.getCenter());
-				currSensor.setCenter(OccupiedCoordinate+radius);
-				OccupiedCoordinate = currSensor.getCenter() + radius;
-			}
-			else if((currSensor.getCenter() - radius) < OccupiedCoordinate){
-				//move the sensor
-				totalMovement += Math.abs((OccupiedCoordinate+radius) - currSensor.getCenter());
-				currSensor.setCenter(OccupiedCoordinate+radius);
-				OccupiedCoordinate = currSensor.getCenter() + radius;
-			}			
 		}
-		printSensors();
 		
-		System.out.println("Total Movement: "+totalMovement);
+		printSensors();
+		return totalMovement;
 	}
 	
 	private void printSensors() {
