@@ -26,6 +26,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -40,6 +41,7 @@ import main.AlgorithmType;
 import main.InputVerifier;
 import main.Sensor;
 import main.Simulation;
+import utilities.ColorGenerator;
 import utilities.Constants;
 
 public class SimulationScene
@@ -297,10 +299,13 @@ public class SimulationScene
 		
 		ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
 		ArrayList<TranslateTransition> translations = new ArrayList<TranslateTransition>();
+		ColorGenerator cGenerator = new ColorGenerator();
 		
 		for(Sensor sensor : m_simulation.getSensors())
 		{			
 			Rectangle rect = new Rectangle(sensor.getScaledWidth(), 5);
+			rect.setFill(cGenerator.generate());
+			rect.opacityProperty().set(0.85);
 			rectangles.add(rect);
 			
 			TranslateTransition tt = new TranslateTransition();
