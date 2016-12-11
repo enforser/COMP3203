@@ -1,26 +1,16 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Random;
 
-public class SplitAlgorithm {
-	
-	ArrayList<Sensor> sensors;
-	double radius;
-	double totalMovement;
+public class SplitAlgorithm extends Algorithm {
 	
 	public SplitAlgorithm(int numSensors, double rad) {
-		sensors = makeRandSensors(numSensors);
-		radius = rad; //Takes 20 sensors to cover entire interval. 
-		totalMovement = 0;
+		super(numSensors, rad);
 	}
 	
 	public SplitAlgorithm(Simulation sim) {
-		sensors = sim.getSensors();
-		radius = sim.getSensorRadius();
-		totalMovement = 0;
+		super(sim);
 	}
 	
 	public double run() {
@@ -70,26 +60,6 @@ public class SplitAlgorithm {
 		printSensors();
 		
 		return totalMovement;
-	}
-	
-	//prints all the sensors with their current x-coordinate on interval
-	private void printSensors() {
-		for (int i = 0; i < sensors.size(); i++) {
-			System.out.print("Sensor " + (i+1) + " = " + sensors.get(i).getCenter() + "\n");
-		}
-		
-		System.out.println("Total Movement: " + totalMovement);
-	}
-	
-	//Creates a random array list of Sensor type objects
-	//Used for testing purposes - should not be needed in final
-	public ArrayList<Sensor> makeRandSensors(int numSensors) {
-		ArrayList<Sensor> array = new ArrayList<Sensor>();		
-		Random generator = new Random();
-		for (int i = 0; i < numSensors; i++) {
-			array.add(new Sensor(radius, false, generator.nextFloat()));
-		}	
-		return array;
 	}
 
 }

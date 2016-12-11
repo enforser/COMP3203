@@ -123,14 +123,32 @@ public class Main extends Application implements EventHandler<ActionEvent>
 			//Algorithm constructor takes number of sensors, and the radius of the sensors. 
 		
 		
-			RigidAlgorithm algo;
+			RigidAlgorithm algoR;
+			SimpleAlgorithm algoS;
+			OverlapAlgorithm algoO;
+			SplitAlgorithm algoSP;
 			int runTimes = 200;
-			double movement = 0;
+			double[] movement = {0, 0, 0, 0};
+			int numSensors = 5;
+			double radius = 0.1;
+			
 			for (int i = 0; i < runTimes; i++) {
-				algo = new RigidAlgorithm(20, 0.025);
-				movement += algo.run();
+				
+				algoR = new RigidAlgorithm(numSensors, radius);
+				algoS = new SimpleAlgorithm(numSensors, radius);
+				algoO = new OverlapAlgorithm(numSensors, radius);
+				algoSP = new SplitAlgorithm(numSensors, radius);
+				
+				movement[0] += algoR.run();
+				movement[1] += algoS.run();
+				movement[2] += algoO.run();
+				movement[3] += algoSP.run();
 			}
-			System.out.println("Average movement of " + runTimes + " runs is: " + movement/runTimes);
+			System.out.println("\n\n\n\nRun Times: " + runTimes + "\n----------------------------------");
+			System.out.println("   Rigid Algorithm:     " + movement[0]/runTimes);
+			System.out.println("   Simple Algorithm:    " + movement[1]/runTimes);
+			System.out.println("   Overlap Algorithm:   " + movement[2]/runTimes);
+			System.out.println("   Split Algorithm:     " + movement[3]/runTimes);
 	}
 }
 
