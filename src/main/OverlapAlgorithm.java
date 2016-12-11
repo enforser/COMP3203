@@ -55,7 +55,7 @@ public class OverlapAlgorithm extends Algorithm {
 			
 			//move the left sensor to the right sensor leaving no space 
 			//between radiuses while creating no overlap between radiuses
-			if (overlap <= 0) {
+			if (overlap <= radius) {
 				totalMovement += sensors.get(currID).moveTo((sensors.get(prevID).getCenter() - (2*radius)));
 			}
 			//if there is space between the current sensor and the previous 
@@ -67,7 +67,7 @@ public class OverlapAlgorithm extends Algorithm {
 			//the amount of overlap the two sensors have and take it 
 			//away from the total amount of overlap we can still afford. 
 			else {
-				double space = (sensors.get(currID).getCenter() + radius) - (sensors.get(prevID).getCenter() - radius);
+				double space = (Math.abs(sensors.get(currID).getCenter() + radius) - (sensors.get(prevID).getCenter() - radius));
 				
 				//if overlap -space is less than 0, then we want to move the sensor.set(currID, sensor.get(currID) - overlap)) and set overlap = 0.
 				//otherwise don't move and overlap -= space
