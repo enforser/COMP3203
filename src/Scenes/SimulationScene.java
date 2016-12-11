@@ -293,6 +293,7 @@ public class SimulationScene
 			tt.setNode(rect);
 			tt.setFromX(sensor.getStartCenter()*1000);
 			tt.setToX(0);
+			// tt.setToX(sensor.getCenter()*1000);
 
 
 			tt.setCycleCount(1);
