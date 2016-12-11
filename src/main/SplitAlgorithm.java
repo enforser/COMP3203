@@ -29,21 +29,28 @@ public class SplitAlgorithm extends Algorithm {
 		int prevRightID, prevLeftID;
 		
 		//set left most and right most to respective edges
-		totalMovement += sensors.get(rightID).moveTo(1- radius);
+		totalMovement += sensors.get(rightID).moveTo(1 - radius);
 		totalMovement += sensors.get(leftID).moveTo(radius);
 		
 		//
-		while (leftID < rightID) {
+		rightID--;
+		leftID++;
+		
+		while (leftID <= rightID) {
 			
 			//SET ID'S FOR CURRENT ITERATION
-			rightID--;
-			leftID++;
-			prevRightID = rightID + 1;
-			prevLeftID = leftID - 1;
+			prevRightID = rightID +1;
+			prevLeftID = leftID-1;
 			
 			//check if current sensors are touching each other
 			if(Math.abs(sensors.get(rightID).getCenter() 
 					- sensors.get(leftID).getCenter()) <= (radius*2)) {
+				
+				if(leftID == rightID) {
+					totalMovement += sensors.get(leftID).moveTo(
+							sensors.get(prevLeftID).getCenter() + (radius*2));
+				}
+				
 				break;
 			}
 			//otherwise move the sensors to left or right, respectively
@@ -51,11 +58,14 @@ public class SplitAlgorithm extends Algorithm {
 				
 				//update the movement taking place
 				//update the sensor objects being moved
-				totalMovement += sensors.get(rightID).moveTo(
-						sensors.get(prevRightID).getCenter() - (radius*2));
 				totalMovement += sensors.get(leftID).moveTo(
 						sensors.get(prevLeftID).getCenter() + (radius*2));
+				totalMovement += sensors.get(rightID).moveTo(
+						sensors.get(prevRightID).getCenter() - (radius*2));
 			}
+			
+			rightID--;
+			leftID++;
 		}
 		printSensors();
 		

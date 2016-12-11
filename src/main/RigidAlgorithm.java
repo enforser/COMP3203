@@ -1,9 +1,7 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Random;
 
 import main.Sensor;
 
@@ -29,9 +27,7 @@ public class RigidAlgorithm extends Algorithm {
 	    });
 			
 		//initial movement
-		if (sensors.get(0).getCenter() < radius) {
-			totalMovement += sensors.get(0).moveTo(radius);
-		}
+		totalMovement += sensors.get(0).moveTo(radius);
 		
 		//move sensor if there is gap between it and the one to left of it
 		//ignore overlap
