@@ -63,7 +63,7 @@ public class SimulationScene
 	private Stage graphWindow;
 	
 	private GridPane m_grid;
-	private GridPane m_animationGrid;
+	private GridPane m_animationGrid = null;
 
 	private Label m_sensorInputLabel;
 	private Label m_radiusInputLabel;
@@ -314,6 +314,11 @@ public class SimulationScene
 	// DEC 8
 	private void constructAnimationPath()
 	{
+		if (m_animationGrid != null)
+		{
+			removePreviousAnimation();
+		}
+		
 		m_animationGrid = new GridPane();
 		
 		ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
@@ -455,6 +460,13 @@ public class SimulationScene
 		)
 	{
 		button.setDisable(true);
+	}
+	
+	private void removePreviousAnimation()
+	{
+		int lastNode = m_grid.getChildren().size() - 1;
+		
+		m_grid.getChildren().remove(lastNode);
 	}
 
 
