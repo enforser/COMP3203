@@ -48,12 +48,17 @@ public class SplitAlgorithm extends Algorithm {
 				if(Math.abs(sensors.get(rightID).getCenter() 
 						- sensors.get(leftID).getCenter()) <= (radius*2)) {
 					
+					if(Math.abs(leftID - rightID) <= 1) {
+						totalMovement += sensors.get(leftID).moveTo(
+								sensors.get(prevLeftID).getCenter() + (radius*2));
+						totalMovement += sensors.get(rightID).moveTo(
+								sensors.get(prevRightID).getCenter() - (radius*2));
+					}
+					
 					if(leftID == rightID) {
 						totalMovement += sensors.get(leftID).moveTo(
 								sensors.get(prevLeftID).getCenter() + (radius*2));
 					}
-					
-					break;
 				}
 				//otherwise move the sensors to left or right, respectively
 				else {
