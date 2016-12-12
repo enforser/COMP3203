@@ -23,18 +23,21 @@ public class SimpleAlgorithm extends Algorithm {
 	            return Double.compare(o1.getCenter(),o2.getCenter());
 	        }
 	    });
-			
-		//initial movement
-		if (sensors.get(0).getCenter() > radius) {
-			totalMovement += sensors.get(0).moveTo(radius);
-		}
 		
-		//move sensor if there is gap between it and the one to left of it
-		//ignore overlap
-		for (int ID = 1; ID < sensors.size(); ID++) {
+		if (!intervalIsFull()) {
 			
-			if (sensors.get(ID).getCenter() - sensors.get(ID - 1).getCenter() > 2*radius) {
-				totalMovement += sensors.get(ID).moveTo(sensors.get(ID - 1).getCenter() + (2*radius));
+			//initial movement
+			if (sensors.get(0).getCenter() > radius) {
+				totalMovement += sensors.get(0).moveTo(radius);
+			}
+			
+			//move sensor if there is gap between it and the one to left of it
+			//ignore overlap
+			for (int ID = 1; ID < sensors.size(); ID++) {
+				
+				if (sensors.get(ID).getCenter() - sensors.get(ID - 1).getCenter() > 2*radius) {
+					totalMovement += sensors.get(ID).moveTo(sensors.get(ID - 1).getCenter() + (2*radius));
+				}
 			}
 		}
 		

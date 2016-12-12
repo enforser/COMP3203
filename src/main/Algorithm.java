@@ -30,6 +30,34 @@ public class Algorithm {
 		System.out.println("Total Movement: " + totalMovement);
 	}
 	
+	protected boolean intervalIsFull() {
+		
+		double currPosition = 0;
+		double prevPosition;
+		
+		//if first sensor 
+		if (sensors.get(0).getCenter() > radius) { 
+			return false;
+		}
+		
+		for (int i = 1; i < sensors.size(); i++) {
+			currPosition = sensors.get(i).getCenter();
+			prevPosition = sensors.get(i-1).getCenter();
+			
+			//if gap between 2 sensors then false
+			if (Math.abs(currPosition - prevPosition) > (radius*2)) {
+				return false;
+			}
+		}
+		
+		//see if last node is close to interval 1
+		if (currPosition < 1 - radius) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	//Creates a random array list of Sensor type objects
 	//Used for testing purposes - should not be needed in final
 	public ArrayList<Sensor> makeRandSensors(int numSensors) {

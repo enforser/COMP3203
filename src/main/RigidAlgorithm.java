@@ -26,14 +26,17 @@ public class RigidAlgorithm extends Algorithm {
 	        }
 	    });
 			
-		//initial movement
-		totalMovement += sensors.get(0).moveTo(radius);
+		if (!intervalIsFull()) {
 		
-		//move sensor if there is gap between it and the one to left of it
-		//ignore overlap
-		for (int ID = 1; ID < sensors.size(); ID++) {
-			if (sensors.get(ID - 1).getCenter() + (2*radius) < 1) {
-				totalMovement += sensors.get(ID).moveTo(sensors.get(ID - 1).getCenter() + (2*radius));
+			//initial movement
+			totalMovement += sensors.get(0).moveTo(radius);
+			
+			//move sensor if there is gap between it and the one to left of it
+			//ignore overlap
+			for (int ID = 1; ID < sensors.size(); ID++) {
+				if (sensors.get(ID - 1).getCenter() + (2*radius) < 1) {
+					totalMovement += sensors.get(ID).moveTo(sensors.get(ID - 1).getCenter() + (2*radius));
+				}
 			}
 		}
 		
